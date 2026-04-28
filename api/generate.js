@@ -154,7 +154,7 @@ Score using this rubric (total = 100 points):
 [F] Resume quality after your tailoring: 5 pts
 
 Output format:
-XX% = A:[pts] B:[pts] C:[pts] D:[pts] E:[pts] F:[pts]
+XX% = A:[pts] B:[pts] C:[pts] D:[pts] E:[pts] F:[pts] (Output only the percentage (XX%), not the following equation
 [2-line comment — lead with the single biggest risk factor]
 
 ---
