@@ -74,7 +74,9 @@ Make this candidate a perfect match for the job. You may mold experience framing
 ## OUTPUT — ALWAYS ALL 5 SECTIONS
 
 ### Likelihood of Getting an Interview
-Strictly two-digit percentage followed by a 2-line comment. Calculate after applying all your tailoring.
+Strictly two-digit percentage followed by a 2-line comment. Calculate after applying all your tailoring. Consider important information like relevant experience, Visa sponsorship, etc to come to this number.
+
+### List of 15-20 keywords from job description separated by ','; whether or not the user has it in there background. This should also be included in content of resume if the person holds relevant keywords in their experience. 
 
 ### 1. PROFILE SUMMARY
 Max 35 words. Mirror JD keywords exactly. Include most relevant experience + availability. No "dynamic", "passionate", or first-person pronouns.
