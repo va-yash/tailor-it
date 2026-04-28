@@ -50,7 +50,7 @@ Rules:
         'anthropic-version': '2023-06-01',
       },
       body: JSON.stringify({
-        model: 'claude-sonnet-4-20250514',
+        model: 'claude-sonnet-4-6',
         max_tokens: 2500,
         system: SYSTEM,
         messages: [{ role: 'user', content: `Parse this resume:\n\n${text}` }],
