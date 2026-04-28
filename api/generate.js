@@ -240,9 +240,18 @@ XX%
 function buildLatexPrompt(profile) {
   const candidateBlock = buildCandidateBlock(profile);
 
-  return `You are a personal resume writer. When given a job description, output a complete, compile-ready LaTeX resume — nothing else.
+  return `## YOUR ROLE
+You are ${name}'s personal resume writer. When given a job description (JD), generate a tailored resume using ONLY the candidate data below.
 
-### First output (not on resume) — Likelihood of getting an interview
+## IMPORTANT
+Make this candidate a perfect match for the job. You may mold experience framing, project selection, and skills grouping — never fabricate facts or alter language. Output must clear ATS and earn interviews.
+
+## OUTPUT — ALWAYS ALL SECTIONS IN ORDER
+
+---
+
+### Likelihood of Getting an Interview
+
 Score using this rubric (total = 100 points):
 
 Work authorization / location eligibility: 25 pts
@@ -260,10 +269,66 @@ Strict output format — two lines, nothing else:
 XX%
 [Line 1: the strongest positive alignment. Line 2: the single biggest risk factor. Never start with "Biggest risk:"]
 
-## IMPORTANT
-Make this candidate a perfect match for the job. Mold experience framing, project selection, and skills grouping — never fabricate facts or alter language. Output must clear ATS and earn interviews.
+---
 
-No explanation before or after the LaTeX. Just: likelihood score line, 2-line comment, then \\documentclass through \\end{document}.
+### JD Keywords (15–20)
+Comma-separated list of the most important keywords from the job description.
+Mark each: ✓ if present in candidate background, ✗ if not.
+These keywords MUST be woven into the resume content wherever truthfully applicable.
+
+---
+
+### 1. PROFILE SUMMARY
+Max 35 words — count carefully, rewrite if over 35.
+Mirror JD keywords exactly. Include most relevant experience.
+No "dynamic", "passionate", "results-driven", or first-person pronouns.
+
+---
+
+### 2. EXPERIENCE
+For each role in the candidate data:
+- Tailor the role title to match the JD
+- Pick 2–3 most JD-relevant bullets from the bullet pool
+- If a bullet lacks a result or metric, add a plausible quantifier
+- Each bullet max 25 words, strong action verb first
+
+---
+
+### 3. RELEVANT PROJECTS
+Max 3 projects, most JD-relevant, reverse chronology.
+Format: **Project Name** | Org | Date — one-line description (max 18 words, keyword-matched to JD)
+
+---
+
+### 4. TECHNICAL SKILLS
+Only skills relevant to JD. Exactly 3 labelled groups — no separate Soft Skills section:
+1. Domain-specific (match JD domain, e.g. IT Staffing & Talent Acquisition, Finance, Aviation)
+2. Technical & Analytical — tools, platforms, methods, software
+3. Soft Skills & Languages — 3–4 JD-relevant interpersonal skills + all candidate languages
+
+---
+
+${candidateBlock}
+
+---
+
+## OUTPUT FORMAT (markdown, no preamble, no explanation — follow exactly)
+
+---
+
+### Likelihood of Getting an Interview
+XX%
+[2-line comment — lead with the aligning positive comment, follow with the biggest risk factor]
+
+---
+
+### JD Keywords
+[keyword ✓, keyword ✗, keyword ✓, ...]
+
+---`;
+}
+
+No explanation before or after the LaTeX. Just: likelihood score line, 2-line comment, JD Keywords, then \\documentclass through \\end{document}.
 
 ${candidateBlock}
 
