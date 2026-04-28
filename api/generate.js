@@ -131,32 +131,20 @@ Make this candidate a perfect match for the job. You may mold experience framing
 
 Score using this rubric (total = 100 points):
 
-[A] Work authorization / location eligibility: 25 pts
-    - Candidate location and visa status fully matches JD requirement: 25
-    - JD requirement unclear or not stated: 15
-    - Candidate likely ineligible (wrong country, needs sponsorship, JD says no sponsorship): 0
-
-[B] Core role experience match: 30 pts
-    - Direct, titled experience in this role: 25–30
-    - Transferable experience, adjacent role: 10–20
-    - Weak or unrelated background: 0–10
-
-[C] Required skills coverage: 20 pts
-    - Covers all explicitly required skills: 20
-    - Covers most: 10–15
-    - Misses key required skills: 0–10
-
-[D] Preferred / bonus skills: 10 pts
-
-[E] Culture and soft skill signals in profile: 10 pts
-
-[F] Resume quality after your tailoring: 5 pts
-
+Work authorization / location eligibility: 25 pts
+    - Fully eligible: 25 | Unclear: 15 | Ineligible / needs sponsorship / wrong country: 0
+Core role experience match: 30 pts
+Required skills coverage: 20 pts
+Preferred / bonus skills: 10 pts
+Culture and soft skill signals: 10 pts
+Resume quality after tailoring: 5 pts
 Likelihood of getting interview: output only XX%. Do not output the points breakdown.
 
-Strict output format:
+Output ONLY the final percentage number. No letters, no point breakdown, no labels.
+
+Strict output format — two lines, nothing else:
 XX%
-[2-line comment — lead with the aligning positive comment and follow it with the single biggest risk factor]
+[Line 1: the strongest positive alignment. Line 2: the single biggest risk factor. Never start with "Biggest risk:"]
 
 ---
 
@@ -257,19 +245,20 @@ function buildLatexPrompt(profile) {
 ### First output (not on resume) — Likelihood of getting an interview
 Score using this rubric (total = 100 points):
 
-[A] Work authorization / location eligibility: 25 pts
+Work authorization / location eligibility: 25 pts
     - Fully eligible: 25 | Unclear: 15 | Ineligible / needs sponsorship / wrong country: 0
-[B] Core role experience match: 30 pts
-[C] Required skills coverage: 20 pts
-[D] Preferred / bonus skills: 10 pts
-[E] Culture and soft skill signals: 10 pts
-[F] Resume quality after tailoring: 5 pts
-
+Core role experience match: 30 pts
+Required skills coverage: 20 pts
+Preferred / bonus skills: 10 pts
+Culture and soft skill signals: 10 pts
+Resume quality after tailoring: 5 pts
 Likelihood of getting interview: output only XX%. Do not output the points breakdown.
 
-Strict output format:
+Output ONLY the final percentage number. No letters, no point breakdown, no labels.
+
+Strict output format — two lines, nothing else:
 XX%
-[2-line comment — lead with the aligning positive comment and follow it with the single biggest risk factor]
+[Line 1: the strongest positive alignment. Line 2: the single biggest risk factor. Never start with "Biggest risk:"]
 
 ## IMPORTANT
 Make this candidate a perfect match for the job. Mold experience framing, project selection, and skills grouping — never fabricate facts or alter language. Output must clear ATS and earn interviews.
