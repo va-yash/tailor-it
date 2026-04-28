@@ -152,10 +152,10 @@ Score using this rubric (total = 100 points):
 [E] Culture and soft skill signals in profile: 10 pts
 
 [F] Resume quality after your tailoring: 5 pts
+Likelihood of getting interview XX% = A:[pts] B:[pts] C:[pts] D:[pts] E:[pts] F:[pts] (Output only the percentage (XX%), not the following equation
 
 Output format:
-XX% = A:[pts] B:[pts] C:[pts] D:[pts] E:[pts] F:[pts] (Output only the percentage (XX%), not the following equation
-[2-line comment — lead with the single biggest risk factor]
+XX%: [2-line comment — lead with the aligning positive comment and follow it with single biggest risk factor and others if required]
 
 ---
 
