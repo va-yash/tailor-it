@@ -1,0 +1,8 @@
+{
+  "name": "tailor-it",
+  "version": "1.0.0",
+  "description": "AI-powered resume tailoring tool",
+  "engines": {
+    "node": "18.x"
+  }
+}
