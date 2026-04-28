@@ -239,6 +239,7 @@ XX%
 // ─────────────────────────────────────────────
 function buildLatexPrompt(profile) {
   const candidateBlock = buildCandidateBlock(profile);
+  const name = profile?.name || 'the candidate'; // FIX: was missing, caused ReferenceError
 
   return `## YOUR ROLE
 You are ${name}'s personal resume writer. When given a job description (JD), generate a tailored resume using ONLY the candidate data below.
@@ -277,56 +278,6 @@ Mark each: ✓ if present in candidate background, ✗ if not.
 These keywords MUST be woven into the resume content wherever truthfully applicable.
 
 ---
-
-### 1. PROFILE SUMMARY
-Max 35 words — count carefully, rewrite if over 35.
-Mirror JD keywords exactly. Include most relevant experience.
-No "dynamic", "passionate", "results-driven", or first-person pronouns.
-
----
-
-### 2. EXPERIENCE
-For each role in the candidate data:
-- Tailor the role title to match the JD
-- Pick 2–3 most JD-relevant bullets from the bullet pool
-- If a bullet lacks a result or metric, add a plausible quantifier
-- Each bullet max 25 words, strong action verb first
-
----
-
-### 3. RELEVANT PROJECTS
-Max 3 projects, most JD-relevant, reverse chronology.
-Format: **Project Name** | Org | Date — one-line description (max 18 words, keyword-matched to JD)
-
----
-
-### 4. TECHNICAL SKILLS
-Only skills relevant to JD. Exactly 3 labelled groups — no separate Soft Skills section:
-1. Domain-specific (match JD domain, e.g. IT Staffing & Talent Acquisition, Finance, Aviation)
-2. Technical & Analytical — tools, platforms, methods, software
-3. Soft Skills & Languages — 3–4 JD-relevant interpersonal skills + all candidate languages
-
----
-
-${candidateBlock}
-
----
-
-## OUTPUT FORMAT (markdown, no preamble, no explanation — follow exactly)
-
----
-
-### Likelihood of Getting an Interview
-XX%
-[2-line comment — lead with the aligning positive comment, follow with the biggest risk factor]
-
----
-
-### JD Keywords
-[keyword ✓, keyword ✗, keyword ✓, ...]
-
----`;
-}
 
 No explanation before or after the LaTeX. Just: likelihood score line, 2-line comment, JD Keywords, then \\documentclass through \\end{document}.
 
@@ -464,22 +415,22 @@ export default async function handler(req, res) {
 
   const { jd, format, profile: rawProfile } = req.body;
 
-  // FIX #13 — cap JD length
   const jdClean = typeof jd === 'string' ? jd.trim().slice(0, 8000) : '';
   if (jdClean.length < 20)
     return res.status(400).json({ error: 'Please provide a valid job description.' });
 
-  // FIX #14 — sanitize profile
   const profile = sanitizeProfile(rawProfile);
 
   const apiKey = process.env.ANTHROPIC_API_KEY;
   if (!apiKey)
-    return res.status(500).json({ error: 'API key not configured. Contact the site owner.' });
+    return res.status(500).json({ error:'API key not configured. Contact the site owner.' });
 
   const isLatex = format === 'latex';
-  const systemPrompt = isLatex ? buildLatexPrompt(profile) : buildStandardPrompt(profile);
 
+  // FIX: prompt building moved inside try/catch so any future errors are caught gracefully
   try {
+    const systemPrompt = isLatex ? buildLatexPrompt(profile) : buildStandardPrompt(profile);
+
     const upstream = await fetch('https://api.anthropic.com/v1/messages', {
       method: 'POST',
       headers: {
@@ -489,7 +440,7 @@ export default async function handler(req, res) {
       },
       body: JSON.stringify({
         model: 'claude-sonnet-4-6',
-        max_tokens: isLatex ? 4096 : 3000, // FIX #3 — raised from 2000
+        max_tokens: isLatex ? 4096 : 3000,
         system: systemPrompt,
         messages: [{ role: 'user', content: `Here is the job description:\n\n${jdClean}` }],
       }),
@@ -497,7 +448,6 @@ export default async function handler(req, res) {
 
     const data = await upstream.json();
 
-    // FIX #15 — don't leak upstream API error details
     if (!upstream.ok) {
       console.error('Anthropic API error:', data?.error);
       return res.status(upstream.status).json({
