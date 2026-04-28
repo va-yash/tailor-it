@@ -205,8 +205,8 @@ ${candidateBlock}
 ---
 
 ### Likelihood of Getting an Interview
-XX% = A:[pts] B:[pts] C:[pts] D:[pts] E:[pts] F:[pts]
-[2-line comment]
+XX%
+[2-line comment — lead with the aligning positive comment, follow with the biggest risk factor]
 
 ---
 
