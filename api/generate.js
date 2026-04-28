@@ -75,7 +75,6 @@ ${bullets || '(No bullets provided — infer strong action-verb bullets from rol
     })
     .join('\n\n') || 'Not provided';
 
-  // FIX #10 — label project keywords so Claude knows they are technologies/tools
   const projects = (profile.projects || [])
     .map((p, i) => `P${i + 1}. **${p.name}** | ${p.org} | ${p.dates} | Tech: ${p.keywords}`)
     .join('\n') || 'Not provided';
@@ -152,10 +151,12 @@ Score using this rubric (total = 100 points):
 [E] Culture and soft skill signals in profile: 10 pts
 
 [F] Resume quality after your tailoring: 5 pts
-Likelihood of getting interview XX% = A:[pts] B:[pts] C:[pts] D:[pts] E:[pts] F:[pts] (Output only the percentage (XX%), not the following equation
 
-Strict Output format (do not describe % breakdown):
-XX%: [2-line comment — lead with the aligning positive comment and follow it with single biggest risk factor and others if required]
+Likelihood of getting interview: output only XX%. Do not output the points breakdown.
+
+Strict output format:
+XX%
+[2-line comment — lead with the aligning positive comment and follow it with the single biggest risk factor]
 
 ---
 
@@ -263,10 +264,12 @@ Score using this rubric (total = 100 points):
 [D] Preferred / bonus skills: 10 pts
 [E] Culture and soft skill signals: 10 pts
 [F] Resume quality after tailoring: 5 pts
-Likelihood of getting interview XX% = A:[pts] B:[pts] C:[pts] D:[pts] E:[pts] F:[pts] (Output only the percentage (XX%), not the following equation
 
-Strict Output format (do not describe % breakdown):
-XX%: [2-line comment — lead with the aligning positive comment and follow it with single biggest risk factor and others if required]
+Likelihood of getting interview: output only XX%. Do not output the points breakdown.
+
+Strict output format:
+XX%
+[2-line comment — lead with the aligning positive comment and follow it with the single biggest risk factor]
 
 ## IMPORTANT
 Make this candidate a perfect match for the job. Mold experience framing, project selection, and skills grouping — never fabricate facts or alter language. Output must clear ATS and earn interviews.
