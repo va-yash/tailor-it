@@ -420,6 +420,21 @@ function saveProfile(){
   setTimeout(()=>{ btn.textContent=orig; btn.style.background=''; closeProfile(); },1200);
 }
 
+function clearProfile(){
+  if(!confirm('Clear all profile data? This cannot be undone.')) return;
+  localStorage.removeItem('tailorit_profile');
+  profileData = {
+    name:'', email:'', phone:'', location:'',
+    education:[], experience:[], projects:[],
+    skills:'', achievements:[], languages:''
+  };
+  renderProfileForm();
+  updateAvatar();
+  const btn = document.getElementById('saveProfileBtn');
+  btn.textContent='Cleared ✓'; btn.style.background='#c0392b';
+  setTimeout(()=>{ btn.textContent='Save Profile'; btn.style.background=''; },1500);
+}
+  
 // ─────────────────────────────────────────────
 // AVATAR
 // ─────────────────────────────────────────────
