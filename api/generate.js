@@ -154,7 +154,7 @@ Score using this rubric (total = 100 points):
 [F] Resume quality after your tailoring: 5 pts
 Likelihood of getting interview XX% = A:[pts] B:[pts] C:[pts] D:[pts] E:[pts] F:[pts] (Output only the percentage (XX%), not the following equation
 
-Output format:
+Strict Output format (do not describe % breakdown):
 XX%: [2-line comment — lead with the aligning positive comment and follow it with single biggest risk factor and others if required]
 
 ---
@@ -168,7 +168,7 @@ These keywords MUST be woven into the resume content wherever truthfully applica
 
 ### 1. PROFILE SUMMARY
 Max 35 words — count carefully, rewrite if over 35.
-Mirror JD keywords exactly. Include most relevant experience + availability.
+Mirror JD keywords exactly. Include most relevant experience.
 No "dynamic", "passionate", "results-driven", or first-person pronouns.
 
 ---
