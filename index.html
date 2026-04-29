@@ -384,6 +384,7 @@ let profileData = {
 };
 
 let currentFormat = 'standard';
+let cachedScore = null; // locked after first generation so both formats agree
 
 // ─────────────────────────────────────────────
 // LOAD / SAVE profile
@@ -712,6 +713,8 @@ async function generateResume(){
   const copyBtn=document.getElementById('copyBtn');
   btn.disabled=true; btn.classList.add('spinning');
   copyBtn.style.display='none';
+  // Reset cached score at start of each new generation so it gets re-established
+  if(currentFormat==='standard') cachedScore=null;
 
   // Show loading
   document.getElementById('emptyState').style.display='none';
@@ -726,7 +729,7 @@ async function generateResume(){
     const res = await fetch('/api/generate',{
       method:'POST',
       headers:{'Content-Type':'application/json'},
-      body: JSON.stringify({jd, format:currentFormat, profile:profileData})
+      body: JSON.stringify({jd, format:currentFormat, profile:profileData, lockedScore:cachedScore})
     });
     const data = await res.json();
     if(!res.ok) throw new Error(data.error||`Server error ${res.status}`);
@@ -742,12 +745,18 @@ async function generateResume(){
       if(likelihood){
         const lEl=document.createElement('div'); lEl.innerHTML=parseMarkdown(likelihood); lEl.style.marginBottom='12px';
         lo.prepend(lEl);
+        // Cache score from LaTeX run too
+        const _lm=likelihood.match(/(\d{2,3})%/);
+        if(_lm) cachedScore=_lm[1]+'%';
       }
       copyBtn._raw=latexCode;
     } else {
       document.getElementById('outputContent').innerHTML=parseMarkdown(raw);
       document.getElementById('standardOutput').style.display='block';
       copyBtn._raw=raw;
+      // Cache score so LaTeX run uses the same value
+      const _sm=raw.match(/(\d{2,3})%/);
+      if(_sm) cachedScore=_sm[1]+'%';
     }
     copyBtn.style.display='inline-flex'; copyBtn.classList.remove('copied'); copyBtn.textContent='Copy';
   }catch(err){
