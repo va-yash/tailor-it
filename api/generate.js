@@ -142,9 +142,8 @@ Likelihood of getting interview: output only XX%. Do not output the points break
 
 Output ONLY the final percentage number. No letters, no point breakdown, no labels.
 
-Strict output format — two lines, nothing else:
-XX%
-[Line 1: the strongest positive alignment. Line 2: the single biggest risk factor. Never start with "Biggest risk:"]
+Strict output format — one line, nothing else:
+XX% — [≤18 words: strongest match signal, then main risk]
 
 ---
 
@@ -194,8 +193,7 @@ ${candidateBlock}
 ---
 
 ### Likelihood of Getting an Interview
-XX%
-[2-line comment — lead with the aligning positive comment, follow with the biggest risk factor]
+XX% — [≤18 words: strongest match signal, then main risk]
 
 ---
 
@@ -266,9 +264,8 @@ Likelihood of getting interview: output only XX%. Do not output the points break
 
 Output ONLY the final percentage number. No letters, no point breakdown, no labels.
 
-Strict output format — two lines, nothing else:
-XX%
-[Line 1: the strongest positive alignment. Line 2: the single biggest risk factor. Never start with "Biggest risk:"]
+Strict output format — one line, nothing else:
+XX% — [≤18 words: strongest match signal, then main risk]
 
 ---
 
@@ -279,7 +276,7 @@ These keywords MUST be woven into the resume content wherever truthfully applica
 
 ---
 
-No explanation before or after the LaTeX. Just: likelihood score line, 2-line comment, JD Keywords, then \\documentclass through \\end{document}.
+No explanation before or after the LaTeX. Just: likelihood score line, one-line comment, JD Keywords, then \\documentclass through \\end{document}.
 
 ${candidateBlock}
 
@@ -413,7 +410,7 @@ export default async function handler(req, res) {
   if (req.method === 'OPTIONS') return res.status(200).end();
   if (req.method !== 'POST') return res.status(405).json({ error: 'Method not allowed' });
 
-  const { jd, format, profile: rawProfile } = req.body;
+  const { jd, format, profile: rawProfile, lockedScore } = req.body;
 
   const jdClean = typeof jd === 'string' ? jd.trim().slice(0, 8000) : '';
   if (jdClean.length < 20)
@@ -442,7 +439,7 @@ export default async function handler(req, res) {
         model: 'claude-sonnet-4-6',
         max_tokens: isLatex ? 4096 : 3000,
         system: systemPrompt,
-        messages: [{ role: 'user', content: `Here is the job description:\n\n${jdClean}` }],
+        messages: [{ role: 'user', content: `Here is the job description:\n\n${jdClean}` + (lockedScore ? `\n\nIMPORTANT: The interview likelihood score is locked at ${lockedScore}. Output exactly this score — do not recalculate.` : '') }],
       }),
     });
 
