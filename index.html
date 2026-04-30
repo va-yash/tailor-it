@@ -632,7 +632,7 @@ function renderPrefs(){
     html += '<div class="prefs-group-lbl">Bullets per role</div>';
     profileData.experience.forEach((e, i) => {
       const count = profileData.prefs.bulletCounts[i] ?? 3;
-      const poolSize = e.bullets.length || 5;
+      const poolSize = Math.max(e.bullets.length * 2, 5);
       const label = esc(e.title || e.company || `Role ${i+1}`);
       const sub = e.title && e.company ? esc(e.company) : '';
       html += `<div class="pref-row">
