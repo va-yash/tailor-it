@@ -140,14 +140,18 @@ textarea.form-input{resize:vertical;min-height:80px;line-height:1.6;}
 .rm-btn:hover{border-color:#c0392b;color:#c0392b;}
 .rm-btn.tiny{width:22px;height:22px;font-size:11px;}
 .bullets-wrap{margin-top:10px;padding-top:10px;border-top:1px solid var(--border2);}
-.bullets-lbl{font-size:10px;letter-spacing:0.08em;text-transform:uppercase;color:var(--muted);margin-bottom:8px;}
-.bullets-hint{font-size:10px;color:var(--border);text-transform:none;letter-spacing:0;font-style:italic;margin-left:4px;}
-.bullet-row{display:flex;align-items:center;gap:6px;margin-bottom:6px;}
-.bullet-dot{color:var(--orange);font-size:14px;flex-shrink:0;line-height:1;}
-.bullet-inp{flex:1;background:var(--bg);border:1px solid var(--border2);border-radius:6px;padding:6px 10px;color:var(--text);font-family:'DM Sans',sans-serif;font-size:12px;font-weight:300;outline:none;min-width:0;}
-.bullet-inp:focus{border-color:var(--orange);}
+.bullets-lbl{font-size:10px;letter-spacing:0.08em;text-transform:uppercase;color:var(--muted);margin-bottom:8px;display:flex;align-items:center;gap:6px;}
+.bullets-count{background:var(--orange-lt);color:var(--orange);border:1px solid rgba(232,98,10,0.25);border-radius:10px;padding:1px 7px;font-size:10px;font-weight:500;letter-spacing:0;text-transform:none;}
+.bullets-hint{font-size:10px;color:var(--border);text-transform:none;letter-spacing:0;font-style:italic;margin-left:2px;}
+.bullet-row{display:flex;align-items:flex-start;gap:6px;margin-bottom:6px;}
+.bullet-dot{color:var(--orange);font-size:14px;flex-shrink:0;line-height:1.9;}
+.bullet-inp{flex:1;background:var(--bg);border:1px solid var(--border2);border-radius:6px;padding:6px 10px;color:var(--text);font-family:'DM Sans',sans-serif;font-size:12px;font-weight:300;outline:none;min-width:0;resize:none;overflow:hidden;line-height:1.55;min-height:32px;}
+.bullet-inp:focus{border-color:var(--orange);box-shadow:0 0 0 2px var(--orange-lt);}
 .bullet-inp::placeholder{color:var(--muted);}
-.add-sub{background:none;border:none;color:var(--muted);font-family:'DM Sans',sans-serif;font-size:12px;cursor:pointer;padding:3px 0;transition:color 0.15s;}
+.bullet-rm{background:none;border:1px solid var(--border);border-radius:6px;width:24px;height:24px;min-width:24px;color:var(--muted);font-size:12px;cursor:pointer;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:4px;transition:border-color 0.15s,color 0.15s;}
+.bullet-rm:hover{border-color:#c0392b;color:#c0392b;}
+.bullets-empty{font-size:11.5px;color:var(--muted);font-style:italic;padding:6px 0 4px;opacity:0.8;}
+.add-sub{background:none;border:none;color:var(--muted);font-family:'DM Sans',sans-serif;font-size:12px;cursor:pointer;padding:4px 0 2px;transition:color 0.15s;display:flex;align-items:center;gap:4px;}
 .add-sub:hover{color:var(--orange);}
 .empty-hint{font-size:12px;color:var(--muted);text-align:center;padding:12px 0;font-style:italic;}
 
@@ -508,7 +512,18 @@ function addEducation(){ profileData.education.push({id:uid(),degree:'',institut
 function renderExperience(){
   const c = document.getElementById('experienceList');
   if(!profileData.experience.length){ c.innerHTML='<p class="empty-hint">No experience added yet</p>'; return; }
-  c.innerHTML = profileData.experience.map(e=>`
+  c.innerHTML = profileData.experience.map(e=>{
+    const bullets = e.bullets||[];
+    const countBadge = bullets.length ? `<span class="bullets-count">${bullets.length}</span>` : '';
+    const bulletRows = bullets.length
+      ? bullets.map((b,j)=>`
+          <div class="bullet-row">
+            <span class="bullet-dot">•</span>
+            <textarea class="bullet-inp" rows="1" placeholder="Achievement or responsibility…" oninput="updateBullet(${e.id},${j},this.value);autoResize(this)">${esc(b)}</textarea>
+            <button class="bullet-rm" onclick="removeBullet(${e.id},${j})" title="Remove bullet">×</button>
+          </div>`).join('')
+      : '<div class="bullets-empty">No bullets yet — add key achievements &amp; responsibilities for this role.</div>';
+    return `
     <div class="entry-card" data-expid="${e.id}">
       <div class="erow">
         <input class="ei" style="flex:1" placeholder="Job Title" value="${esc(e.title)}" oninput="updateItem('experience',${e.id},'title',this.value)">
@@ -522,22 +537,25 @@ function renderExperience(){
         <input class="ei" style="flex:1" placeholder="Dates (e.g. Jan 2022 – Jul 2023)" value="${esc(e.dates)}" oninput="updateItem('experience',${e.id},'dates',this.value)">
       </div>
       <div class="bullets-wrap">
-        <div class="bullets-lbl">Bullet Pool <span class="bullets-hint">— AI picks the best 2–3 per job application</span></div>
-        ${(e.bullets||[]).map((b,j)=>`
-          <div class="bullet-row">
-            <span class="bullet-dot">•</span>
-            <input class="bullet-inp" value="${esc(b)}" placeholder="Achievement or responsibility…" oninput="updateBullet(${e.id},${j},this.value)">
-            <button class="rm-btn tiny" onclick="removeBullet(${e.id},${j})">×</button>
-          </div>`).join('')}
-        <button class="add-sub" onclick="addBullet(${e.id})">+ Add bullet</button>
+        <div class="bullets-lbl">Bullet Pool ${countBadge}<span class="bullets-hint">AI picks the best 2–3 per application</span></div>
+        <div class="bullets-list" id="blist-${e.id}">${bulletRows}</div>
+        <button class="add-sub" onclick="addBullet(${e.id})">＋ Add bullet</button>
       </div>
-    </div>`).join('');
+    </div>`;
+  }).join('');
+  // Auto-resize any pre-filled textareas (e.g. after PDF parse)
+  setTimeout(()=>{ document.querySelectorAll('.bullet-inp').forEach(autoResize); }, 30);
 }
 function addExperience(){ profileData.experience.push({id:uid(),title:'',company:'',location:'',dates:'',bullets:[]}); renderExperience(); focusFirst('experienceList'); }
+function autoResize(el){
+  el.style.height='auto';
+  el.style.height = el.scrollHeight+'px';
+}
+
 function addBullet(expId){
   const exp = profileData.experience.find(e=>e.id===expId);
   if(exp){ exp.bullets.push(''); renderExperience();
-    setTimeout(()=>{ const c=document.querySelector(`[data-expid="${expId}"]`); const ins=c?.querySelectorAll('.bullet-inp'); ins?.[ins.length-1]?.focus(); },30); }
+    setTimeout(()=>{ const c=document.querySelector(`[data-expid="${expId}"]`); const tas=c?.querySelectorAll('.bullet-inp'); tas?.[tas.length-1]?.focus(); },30); }
 }
 function removeBullet(expId,j){ const exp=profileData.experience.find(e=>e.id===expId); if(exp){exp.bullets.splice(j,1);renderExperience();} }
 function updateBullet(expId,j,val){ const exp=profileData.experience.find(e=>e.id===expId); if(exp) exp.bullets[j]=val; }
