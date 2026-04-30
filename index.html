@@ -679,7 +679,7 @@ function renderPrefs(){
 
 function stepBullets(i, delta){
   const count = profileData.prefs.bulletCounts[i] ?? 3;
-  const poolSize = profileData.experience[i]?.bullets.length || 5;
+  const poolSize = Math.max((profileData.experience[i]?.bullets.length || 0) * 2, 5);
   profileData.prefs.bulletCounts[i] = Math.min(poolSize, Math.max(1, count + delta));
   renderPrefs();
 }
