@@ -71,10 +71,13 @@ Ask the user to click the avatar icon in the top-right corner of the app to set 
       const bullets = (e.bullets || [])
         .map((b, j) => `${j + 1}. ${b}`)
         .join('\n');
+      const bulletInstruction = bullets
+        ? `Rewrite and restructure the bullet pool below into exactly ${n} bullet${n === 1 ? '' : 's'} tailored to the JD. Use ONLY information present in the source bullets — do not add any facts, figures, responsibilities, or metrics not found there. You may split, merge, reorder, or rephrase, but never fabricate.`
+        : `Infer exactly ${n} strong action-verb bullet${n === 1 ? '' : 's'} from role title and company only.`;
       return `[ROLE ${i + 1}]
 ${e.title} | ${e.company}, ${e.location} | ${e.dates}
-Pick exactly ${n} most JD-relevant bullet${n === 1 ? '' : 's'}. If a bullet lacks a metric or result, add a plausible quantifier based on role context:
-${bullets || `(No bullets provided — infer exactly ${n} strong action-verb bullet${n === 1 ? '' : 's'} from role title and company)`}`;
+${bulletInstruction}
+${bullets || '(No bullets provided)'}`;
     })
     .join('\n\n') || 'Not provided';
 
