@@ -140,18 +140,28 @@ textarea.form-input{resize:vertical;min-height:80px;line-height:1.6;}
 .rm-btn:hover{border-color:#c0392b;color:#c0392b;}
 .rm-btn.tiny{width:22px;height:22px;font-size:11px;}
 .bullets-wrap{margin-top:10px;padding-top:10px;border-top:1px solid var(--border2);}
-.bullets-lbl{font-size:10px;letter-spacing:0.08em;text-transform:uppercase;color:var(--muted);margin-bottom:8px;display:flex;align-items:center;gap:6px;}
-.bullets-count{background:var(--orange-lt);color:var(--orange);border:1px solid rgba(232,98,10,0.25);border-radius:10px;padding:1px 7px;font-size:10px;font-weight:500;letter-spacing:0;text-transform:none;}
-.bullets-hint{font-size:10px;color:var(--border);text-transform:none;letter-spacing:0;font-style:italic;margin-left:2px;}
-.bullet-row{display:flex;align-items:flex-start;gap:6px;margin-bottom:6px;}
-.bullet-dot{color:var(--orange);font-size:14px;flex-shrink:0;line-height:1.9;}
-.bullet-inp{flex:1;background:var(--bg);border:1px solid var(--border2);border-radius:6px;padding:6px 10px;color:var(--text);font-family:'DM Sans',sans-serif;font-size:12px;font-weight:300;outline:none;min-width:0;resize:none;overflow:hidden;line-height:1.55;min-height:32px;}
-.bullet-inp:focus{border-color:var(--orange);box-shadow:0 0 0 2px var(--orange-lt);}
+.bullets-lbl{font-size:10px;letter-spacing:0.08em;text-transform:uppercase;color:var(--muted);margin-bottom:8px;}
+.bullets-hint{font-size:10px;color:var(--border);text-transform:none;letter-spacing:0;font-style:italic;margin-left:4px;}
+
+/* ── OUTPUT PREFS ── */
+.pref-row{display:flex;align-items:center;justify-content:space-between;padding:9px 0;border-bottom:1px solid var(--border2);}
+.pref-row:last-child{border-bottom:none;}
+.pref-label{font-size:12.5px;color:var(--text-soft);}
+.pref-sub{font-size:11px;color:var(--muted);margin-top:1px;}
+.stepper{display:flex;align-items:center;}
+.step-btn{width:28px;height:28px;background:var(--surface2);border:1px solid var(--border);color:var(--text-soft);font-size:18px;line-height:1;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:border-color 0.15s,color 0.15s;padding:0;}
+.step-btn:first-child{border-radius:6px 0 0 6px;border-right:none;}
+.step-btn:last-child{border-radius:0 6px 6px 0;border-left:none;}
+.step-btn:hover:not(:disabled){border-color:var(--orange);color:var(--orange);}
+.step-btn:disabled{opacity:0.35;cursor:not-allowed;}
+.step-val{min-width:32px;height:28px;border:1px solid var(--border);background:var(--surface);display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:500;color:var(--text);}
+.prefs-group-lbl{font-size:10px;letter-spacing:0.08em;text-transform:uppercase;color:var(--muted);font-weight:500;margin:14px 0 6px;}
+.bullet-row{display:flex;align-items:center;gap:6px;margin-bottom:6px;}
+.bullet-dot{color:var(--orange);font-size:14px;flex-shrink:0;line-height:1;}
+.bullet-inp{flex:1;background:var(--bg);border:1px solid var(--border2);border-radius:6px;padding:6px 10px;color:var(--text);font-family:'DM Sans',sans-serif;font-size:12px;font-weight:300;outline:none;min-width:0;}
+.bullet-inp:focus{border-color:var(--orange);}
 .bullet-inp::placeholder{color:var(--muted);}
-.bullet-rm{background:none;border:1px solid var(--border);border-radius:6px;width:24px;height:24px;min-width:24px;color:var(--muted);font-size:12px;cursor:pointer;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:4px;transition:border-color 0.15s,color 0.15s;}
-.bullet-rm:hover{border-color:#c0392b;color:#c0392b;}
-.bullets-empty{font-size:11.5px;color:var(--muted);font-style:italic;padding:6px 0 4px;opacity:0.8;}
-.add-sub{background:none;border:none;color:var(--muted);font-family:'DM Sans',sans-serif;font-size:12px;cursor:pointer;padding:4px 0 2px;transition:color 0.15s;display:flex;align-items:center;gap:4px;}
+.add-sub{background:none;border:none;color:var(--muted);font-family:'DM Sans',sans-serif;font-size:12px;cursor:pointer;padding:3px 0;transition:color 0.15s;}
 .add-sub:hover{color:var(--orange);}
 .empty-hint{font-size:12px;color:var(--muted);text-align:center;padding:12px 0;font-style:italic;}
 
@@ -336,6 +346,12 @@ textarea.form-input{resize:vertical;min-height:80px;line-height:1.6;}
       <input class="form-input" id="pLanguages" placeholder="e.g. English (C1), French (A2), Hindi (Native)"/>
     </div>
 
+    <!-- Output Preferences -->
+    <div class="profile-section" id="prefsSection">
+      <div class="section-hd"><span class="section-title">Output Preferences</span></div>
+      <div id="prefsList"><p class="empty-hint">Add experience or projects to configure output.</p></div>
+    </div>
+
   </div>
 </div>
 
@@ -384,7 +400,8 @@ let profileData = {
   projects:[],    // {id, name, org, dates, keywords}
   skills:'',
   achievements:[], // {id, text}
-  languages:''
+  languages:'',
+  prefs:{ bulletCounts:[], projectCount:3, extraSections:[] }
 };
 
 let currentFormat = 'standard';
@@ -404,7 +421,12 @@ function loadProfile(){
       education: (p.education||[]).map(e=>({id:uid(),degree:e.degree||'',institution:e.institution||'',dates:e.dates||''})),
       experience: (p.experience||[]).map(e=>({id:uid(),title:e.title||'',company:e.company||'',location:e.location||'',dates:e.dates||'',bullets:(e.bullets||[])})),
       projects: (p.projects||[]).map(x=>({id:uid(),name:x.name||'',org:x.org||'',dates:x.dates||'',keywords:x.keywords||''})),
-      achievements: (p.achievements||[]).map(a=>({id:uid(),text:typeof a==='string'?a:a.text||''}))
+      achievements: (p.achievements||[]).map(a=>({id:uid(),text:typeof a==='string'?a:a.text||''})),
+      prefs: {
+        bulletCounts: Array.isArray(p.prefs?.bulletCounts) ? p.prefs.bulletCounts : [],
+        projectCount: typeof p.prefs?.projectCount === 'number' ? p.prefs.projectCount : 3,
+        extraSections: Array.isArray(p.prefs?.extraSections) ? p.prefs.extraSections.map(s=>({id:uid(),title:s.title||'',content:s.content||''})) : []
+      }
     };
   }catch(e){console.error('Profile load error',e);}
   updateAvatar();
@@ -431,7 +453,8 @@ function clearProfile(){
   profileData = {
     name:'', email:'', phone:'', location:'',
     education:[], experience:[], projects:[],
-    skills:'', achievements:[], languages:''
+    skills:'', achievements:[], languages:'',
+    prefs:{ bulletCounts:[], projectCount:3, extraSections:[] }
   };
   renderProfileForm();
   updateAvatar();
@@ -481,7 +504,7 @@ function renderProfileForm(){
   document.getElementById('pLocation').value = profileData.location;
   document.getElementById('pSkills').value = profileData.skills;
   document.getElementById('pLanguages').value = profileData.languages;
-  renderEducation(); renderExperience(); renderProjects(); renderAchievements();
+  renderEducation(); renderExperience(); renderProjects(); renderAchievements(); renderPrefs();
 }
 
 const esc = s => (s||'').replace(/"/g,'&quot;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
@@ -512,18 +535,7 @@ function addEducation(){ profileData.education.push({id:uid(),degree:'',institut
 function renderExperience(){
   const c = document.getElementById('experienceList');
   if(!profileData.experience.length){ c.innerHTML='<p class="empty-hint">No experience added yet</p>'; return; }
-  c.innerHTML = profileData.experience.map(e=>{
-    const bullets = e.bullets||[];
-    const countBadge = bullets.length ? `<span class="bullets-count">${bullets.length}</span>` : '';
-    const bulletRows = bullets.length
-      ? bullets.map((b,j)=>`
-          <div class="bullet-row">
-            <span class="bullet-dot">•</span>
-            <textarea class="bullet-inp" rows="1" placeholder="Achievement or responsibility…" oninput="updateBullet(${e.id},${j},this.value);autoResize(this)">${esc(b)}</textarea>
-            <button class="bullet-rm" onclick="removeBullet(${e.id},${j})" title="Remove bullet">×</button>
-          </div>`).join('')
-      : '<div class="bullets-empty">No bullets yet — add key achievements &amp; responsibilities for this role.</div>';
-    return `
+  c.innerHTML = profileData.experience.map(e=>`
     <div class="entry-card" data-expid="${e.id}">
       <div class="erow">
         <input class="ei" style="flex:1" placeholder="Job Title" value="${esc(e.title)}" oninput="updateItem('experience',${e.id},'title',this.value)">
@@ -537,25 +549,26 @@ function renderExperience(){
         <input class="ei" style="flex:1" placeholder="Dates (e.g. Jan 2022 – Jul 2023)" value="${esc(e.dates)}" oninput="updateItem('experience',${e.id},'dates',this.value)">
       </div>
       <div class="bullets-wrap">
-        <div class="bullets-lbl">Bullet Pool ${countBadge}<span class="bullets-hint">AI picks the best 2–3 per application</span></div>
-        <div class="bullets-list" id="blist-${e.id}">${bulletRows}</div>
-        <button class="add-sub" onclick="addBullet(${e.id})">＋ Add bullet</button>
+        <div class="bullets-lbl">Bullet Pool <span class="bullets-hint">— AI picks the best 2–3 per job application</span></div>
+        ${(e.bullets||[]).map((b,j)=>`
+          <div class="bullet-row">
+            <span class="bullet-dot">•</span>
+            <input class="bullet-inp" value="${esc(b)}" placeholder="Achievement or responsibility…" oninput="updateBullet(${e.id},${j},this.value)">
+            <button class="rm-btn tiny" onclick="removeBullet(${e.id},${j})">×</button>
+          </div>`).join('')}
+        <button class="add-sub" onclick="addBullet(${e.id})">+ Add bullet</button>
       </div>
-    </div>`;
-  }).join('');
-  // Auto-resize any pre-filled textareas (e.g. after PDF parse)
-  setTimeout(()=>{ document.querySelectorAll('.bullet-inp').forEach(autoResize); }, 30);
+    </div>`).join('');
 }
-function addExperience(){ profileData.experience.push({id:uid(),title:'',company:'',location:'',dates:'',bullets:[]}); renderExperience(); focusFirst('experienceList'); }
-function autoResize(el){
-  el.style.height='auto';
-  el.style.height = el.scrollHeight+'px';
+function addExperience(){
+  profileData.experience.push({id:uid(),title:'',company:'',location:'',dates:'',bullets:[]});
+  profileData.prefs.bulletCounts.push(3);
+  renderExperience(); renderPrefs(); focusFirst('experienceList');
 }
-
 function addBullet(expId){
   const exp = profileData.experience.find(e=>e.id===expId);
   if(exp){ exp.bullets.push(''); renderExperience();
-    setTimeout(()=>{ const c=document.querySelector(`[data-expid="${expId}"]`); const tas=c?.querySelectorAll('.bullet-inp'); tas?.[tas.length-1]?.focus(); },30); }
+    setTimeout(()=>{ const c=document.querySelector(`[data-expid="${expId}"]`); const ins=c?.querySelectorAll('.bullet-inp'); ins?.[ins.length-1]?.focus(); },30); }
 }
 function removeBullet(expId,j){ const exp=profileData.experience.find(e=>e.id===expId); if(exp){exp.bullets.splice(j,1);renderExperience();} }
 function updateBullet(expId,j,val){ const exp=profileData.experience.find(e=>e.id===expId); if(exp) exp.bullets[j]=val; }
@@ -598,6 +611,88 @@ function renderAchievements(){
 function addAchievement(){ profileData.achievements.push({id:uid(),text:''}); renderAchievements(); focusFirst('achievementList'); }
 
 // ─────────────────────────────────────────────
+// OUTPUT PREFERENCES
+// ─────────────────────────────────────────────
+function renderPrefs(){
+  const c = document.getElementById('prefsList');
+  if(!c) return;
+  const hasExp = profileData.experience.length > 0;
+  const hasProj = profileData.projects.length > 0;
+  if(!hasExp && !hasProj && !profileData.prefs.extraSections.length){
+    c.innerHTML='<p class="empty-hint">Add experience or projects to configure output.</p>';
+    return;
+  }
+  // Sync bulletCounts length
+  while(profileData.prefs.bulletCounts.length < profileData.experience.length) profileData.prefs.bulletCounts.push(3);
+  profileData.prefs.bulletCounts.length = profileData.experience.length;
+
+  let html = '';
+
+  if(hasExp){
+    html += '<div class="prefs-group-lbl">Bullets per role</div>';
+    profileData.experience.forEach((e, i) => {
+      const count = profileData.prefs.bulletCounts[i] ?? 3;
+      const poolSize = e.bullets.length || 5;
+      const label = esc(e.title || e.company || `Role ${i+1}`);
+      const sub = e.title && e.company ? esc(e.company) : '';
+      html += `<div class="pref-row">
+        <div><div class="pref-label">${label}</div>${sub?`<div class="pref-sub">${sub}</div>`:''}</div>
+        <div class="stepper">
+          <button class="step-btn" onclick="stepBullets(${i},-1)" ${count<=1?'disabled':''}>−</button>
+          <div class="step-val">${count}</div>
+          <button class="step-btn" onclick="stepBullets(${i},1)" ${count>=poolSize?'disabled':''}>+</button>
+        </div>
+      </div>`;
+    });
+  }
+
+  if(hasProj){
+    const pc = profileData.prefs.projectCount;
+    const total = profileData.projects.length;
+    html += '<div class="prefs-group-lbl">Projects to include</div>';
+    html += `<div class="pref-row">
+      <div><div class="pref-label">Number of projects</div><div class="pref-sub">${total} in pool</div></div>
+      <div class="stepper">
+        <button class="step-btn" onclick="stepProjects(-1)" ${pc<=0?'disabled':''}>−</button>
+        <div class="step-val">${pc}</div>
+        <button class="step-btn" onclick="stepProjects(1)" ${pc>=total?'disabled':''}>+</button>
+      </div>
+    </div>`;
+  }
+
+  html += '<div class="prefs-group-lbl">Extra sections</div>';
+  profileData.prefs.extraSections.forEach(s => {
+    html += `<div class="entry-card" style="margin-bottom:8px">
+      <div class="erow">
+        <input class="ei" style="flex:1" placeholder="Section title (e.g. Certifications)" value="${esc(s.title)}" oninput="updateExtraSection(${s.id},'title',this.value)">
+        <button class="rm-btn" onclick="removeExtraSection(${s.id})">×</button>
+      </div>
+      <div class="erow">
+        <textarea class="ei" style="flex:1;min-height:64px;resize:vertical" placeholder="Content for this section…" oninput="updateExtraSection(${s.id},'content',this.value)">${esc(s.content)}</textarea>
+      </div>
+    </div>`;
+  });
+  html += `<button class="btn-add" onclick="addExtraSection()">+ Add section</button>`;
+
+  c.innerHTML = html;
+}
+
+function stepBullets(i, delta){
+  const count = profileData.prefs.bulletCounts[i] ?? 3;
+  const poolSize = profileData.experience[i]?.bullets.length || 5;
+  profileData.prefs.bulletCounts[i] = Math.min(poolSize, Math.max(1, count + delta));
+  renderPrefs();
+}
+function stepProjects(delta){
+  const total = profileData.projects.length;
+  profileData.prefs.projectCount = Math.min(total, Math.max(0, (profileData.prefs.projectCount ?? 3) + delta));
+  renderPrefs();
+}
+function addExtraSection(){ profileData.prefs.extraSections.push({id:uid(),title:'',content:''}); renderPrefs(); }
+function removeExtraSection(id){ profileData.prefs.extraSections = profileData.prefs.extraSections.filter(s=>s.id!==id); renderPrefs(); }
+function updateExtraSection(id, field, val){ const s = profileData.prefs.extraSections.find(x=>x.id===id); if(s) s[field]=val; }
+
+// ─────────────────────────────────────────────
 // SHARED HELPERS
 // ─────────────────────────────────────────────
 function updateItem(section, id, field, value){
@@ -605,9 +700,14 @@ function updateItem(section, id, field, value){
   if(item) item[field]=value;
 }
 function removeItem(section, id){
+  if(section === 'experience'){
+    const idx = profileData.experience.findIndex(x=>x.id===id);
+    if(idx !== -1) profileData.prefs.bulletCounts.splice(idx, 1);
+  }
   profileData[section] = profileData[section].filter(x=>x.id!==id);
   const renders = {education:renderEducation,experience:renderExperience,projects:renderProjects,achievements:renderAchievements};
   renders[section]?.();
+  if(section === 'experience' || section === 'projects') renderPrefs();
 }
 function focusFirst(containerId){
   setTimeout(()=>{ document.getElementById(containerId)?.querySelector('input')?.focus(); },30);
@@ -671,6 +771,9 @@ function applyParsedProfile(p){
     profileData.projects = p.projects.map(x=>({id:uid(),name:x.name||'',org:x.org||'',dates:x.dates||'',keywords:x.keywords||''}));
   if(p.achievements?.length)
     profileData.achievements = p.achievements.map(a=>({id:uid(),text:typeof a==='string'?a:a.text||''}));
+  // Reset prefs to sensible defaults after a fresh parse
+  profileData.prefs.bulletCounts = profileData.experience.map(e => Math.min(3, Math.max(1, e.bullets.length || 3)));
+  profileData.prefs.projectCount = Math.min(3, profileData.projects.length) || 3;
   renderProfileForm();
 }
 
@@ -747,7 +850,7 @@ async function generateResume(){
     const res = await fetch('/api/generate',{
       method:'POST',
       headers:{'Content-Type':'application/json'},
-      body: JSON.stringify({jd, format:currentFormat, profile:profileData, lockedScore:cachedScore})
+      body: JSON.stringify({jd, format:currentFormat, profile:profileData, lockedScore:cachedScore, prefs:profileData.prefs})
     });
     const data = await res.json();
     if(!res.ok) throw new Error(data.error||`Server error ${res.status}`);
