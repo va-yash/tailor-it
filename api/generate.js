@@ -65,13 +65,14 @@ Ask the user to click the avatar icon in the top-right corner of the app to set 
 
   const exp = (profile.experience || [])
     .map((e, i) => {
-      const bullets = (e.bullets || [])
-        .map((b, j) => `${j + 1}. ${b}`)
-        .join('\n');
-      return `[ROLE ${i + 1}]
-${e.title} | ${e.company}, ${e.location} | ${e.dates}
-Pick 2–3 most JD-relevant bullets. If a bullet lacks a metric or result, add a plausible quantifier based on role context:
-${bullets || '(No bullets provided — infer strong action-verb bullets from role title and company)'}`;
+      const hasBullets = Array.isArray(e.bullets) && e.bullets.filter(b => b.trim()).length > 0;
+      const bulletLines = hasBullets
+        ? e.bullets.filter(b => b.trim()).map((b, j) => `  ${j + 1}. ${b}`).join('\n')
+        : null;
+      const bulletInstruction = hasBullets
+        ? `USER-PROVIDED BULLETS — select 2–3 most JD-relevant; reproduce the chosen bullets VERBATIM (do NOT rewrite, rephrase, or fabricate); you may only append a metric/quantifier at the end if the bullet has none:\n${bulletLines}`
+        : `NO BULLETS PROVIDED — infer 2–3 strong action-verb bullets from job title, company context, and JD keywords.`;
+      return `[ROLE ${i + 1}]\n${e.title} | ${e.company}, ${e.location} | ${e.dates}\n${bulletInstruction}`;
     })
     .join('\n\n') || 'Not provided';
 
@@ -164,8 +165,8 @@ No "dynamic", "passionate", "results-driven", or first-person pronouns.
 ### 2. EXPERIENCE
 For each role in the candidate data:
 - Tailor the role title to match the JD
-- Pick 2–3 most JD-relevant bullets from the bullet pool
-- If a bullet lacks a result or metric, add a plausible quantifier
+- When USER-PROVIDED BULLETS exist: pick 2–3 most JD-relevant ones and reproduce them VERBATIM — do NOT rewrite or fabricate; you may only append a short quantifier/metric at the end if the bullet genuinely lacks one
+- When NO BULLETS are provided: write 2–3 strong action-verb bullets inferred from the role and JD
 - Each bullet max 25 words, strong action verb first
 
 ---
@@ -290,7 +291,7 @@ HEADER: Centre-aligned. Name in large bold, role title below, contact line below
 
 SUMMARY: 2 lines, ≤50 words. Mirror JD keywords exactly. No "passionate", "results-driven". No first-person.
 
-BULLETS: Action verb first. Google XYZ format: "Accomplished X by doing Y, resulting in Z". If a bullet lacks a result or metric, add a plausible quantifier. Most relevant bullets first. 2–3 bullets per role max.
+BULLETS: When USER-PROVIDED BULLETS exist: select 2–3 most JD-relevant and reproduce VERBATIM — do NOT rewrite or fabricate; append a quantifier only if the bullet genuinely lacks one. When no bullets are provided: write 2–3 strong action-verb bullets using Google XYZ format. Most relevant first. 2–3 per role max.
 
 PROJECTS: Min 3, reverse chronology. One-line description, keyword-matched to JD.
 
