@@ -18,34 +18,35 @@
 body{background:var(--bg);color:var(--text);font-family:'DM Sans',sans-serif;font-weight:300;min-height:100vh;display:flex;flex-direction:column;}
 
 /* ── HEADER ── */
-header{display:flex;align-items:center;justify-content:space-between;padding:16px 32px;background:var(--surface);border-bottom:1px solid var(--border);box-shadow:var(--shadow);position:sticky;top:0;z-index:10;gap:12px;}
-.brand{display:flex;align-items:baseline;gap:10px;flex-shrink:0;}
-.brand-name{font-family:'Instrument Serif',serif;font-size:24px;font-weight:600;color:var(--text);letter-spacing:-0.3px;line-height:1;}
+header{display:flex;align-items:center;justify-content:space-between;padding:12px 32px;background:var(--surface);border-bottom:1px solid var(--border);box-shadow:var(--shadow);position:sticky;top:0;z-index:10;gap:16px;}
+.brand{display:flex;flex-direction:column;align-items:flex-start;gap:3px;flex-shrink:0;}
+.brand-name{font-family:'Instrument Serif',serif;font-size:26px;font-weight:600;color:var(--text);letter-spacing:-0.4px;line-height:1;}
 .brand-name span{color:var(--orange);}
-.brand-divider{width:1px;height:16px;background:var(--border);flex-shrink:0;}
-.brand-sub{font-size:11px;color:var(--muted);letter-spacing:0.08em;text-transform:uppercase;font-weight:400;}
+.brand-divider{display:none;}
+.brand-sub{font-size:10px;color:var(--muted);letter-spacing:0.09em;text-transform:uppercase;font-weight:400;line-height:1;}
+.brand-meta{display:flex;align-items:center;gap:10px;}
 .header-right{display:flex;align-items:center;gap:14px;}
-.creator-link{background:none;border:none;color:var(--text-soft);font-family:'DM Sans',sans-serif;font-size:13px;font-weight:400;cursor:pointer;text-decoration:underline;text-underline-offset:3px;padding:0;transition:color 0.15s;}
-.creator-link:hover{color:var(--orange);}
-.avatar-btn{width:34px;height:34px;border-radius:50%;background:var(--surface2);border:1.5px solid var(--border);color:var(--muted);font-family:'DM Sans',sans-serif;font-size:12px;font-weight:500;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:border-color 0.15s,background 0.15s;flex-shrink:0;}
+.creator-link{background:none;border:none;color:var(--muted);font-family:'DM Sans',sans-serif;font-size:11px;font-weight:400;cursor:pointer;text-decoration:none;padding:0;transition:color 0.15s;letter-spacing:0.02em;}
+.creator-link:hover{color:var(--orange);text-decoration:underline;text-underline-offset:3px;}
+.avatar-btn{width:44px;height:44px;border-radius:50%;background:var(--surface2);border:1.5px solid var(--border);color:var(--muted);font-family:'DM Sans',sans-serif;font-size:14px;font-weight:500;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:border-color 0.15s,background 0.15s;flex-shrink:0;}
 .avatar-btn:hover{border-color:var(--orange);}
 .avatar-btn.has-profile{background:var(--orange-lt);border-color:var(--orange);color:var(--orange);}
 
 /* ── AVATAR WRAP + ONBOARDING HINT ── */
-.avatar-wrap{display:flex;flex-direction:column;align-items:center;gap:3px;flex-shrink:0;}
-.avatar-label{font-size:9.5px;color:var(--muted);letter-spacing:0.04em;white-space:nowrap;transition:color 0.2s;}
-.avatar-hint{font-size:9px;color:var(--orange);white-space:nowrap;font-weight:500;letter-spacing:0.02em;opacity:0;pointer-events:none;line-height:1;}
+.avatar-wrap{display:flex;flex-direction:column;align-items:center;gap:4px;flex-shrink:0;}
+.avatar-label{font-size:11px;color:var(--muted);font-family:'DM Sans',sans-serif;font-weight:400;letter-spacing:0.03em;white-space:nowrap;transition:color 0.2s;}
+.avatar-hint{font-size:10px;color:var(--orange);white-space:nowrap;font-family:'DM Sans',sans-serif;font-weight:500;letter-spacing:0.02em;opacity:0;pointer-events:none;line-height:1;}
 .avatar-wrap.no-profile .avatar-hint{opacity:1;animation:hintPulse 2.2s ease-in-out infinite;}
 .avatar-wrap.no-profile .avatar-btn{animation:avatarGlow 2.2s ease-in-out infinite;}
 .avatar-wrap.no-profile .avatar-label{color:var(--orange);}
 @keyframes avatarGlow{
   0%,100%{box-shadow:0 0 0 0 rgba(232,98,10,0);border-color:var(--border);}
-  50%{box-shadow:0 0 0 5px rgba(232,98,10,0.18);border-color:var(--orange);}
+  50%{box-shadow:0 0 0 6px rgba(232,98,10,0.16);border-color:var(--orange);}
 }
 @keyframes hintPulse{0%,100%{opacity:0.45;}50%{opacity:1;}}
 
 /* ── MAIN ── */
-main{flex:1;display:grid;grid-template-columns:1fr 1fr;height:calc(100vh - 65px);}
+main{flex:1;display:grid;grid-template-columns:1fr 1fr;height:calc(100vh - 72px);}
 .panel{display:flex;flex-direction:column;padding:22px 28px;overflow:hidden;}
 .panel:first-child{border-right:1px solid var(--border);}
 .panel-label{font-size:10.5px;letter-spacing:0.11em;text-transform:uppercase;color:var(--muted);margin-bottom:10px;font-weight:500;}
@@ -196,6 +197,18 @@ textarea.form-input{resize:vertical;min-height:80px;line-height:1.6;}
 .creator-links a{display:inline-flex;align-items:center;gap:6px;color:var(--orange);text-decoration:underline;text-underline-offset:3px;font-size:14px;font-weight:500;padding:9px 20px;border:1px solid var(--orange);border-radius:20px;background:var(--orange-lt);transition:background 0.15s;}
 .creator-links a:hover{background:rgba(232,98,10,0.17);}
 
+/* ── ONBOARDING OVERLAY ── */
+#onboardOverlay{position:fixed;inset:0;z-index:500;display:flex;align-items:flex-start;justify-content:flex-end;padding:80px 40px 0 0;pointer-events:none;opacity:1;transition:opacity 0.35s ease;}
+#onboardOverlay.hidden{opacity:0;pointer-events:none;}
+#onboardOverlay .ob-backdrop{position:absolute;inset:0;background:rgba(30,35,46,0.52);backdrop-filter:blur(3px);pointer-events:all;cursor:pointer;}
+#onboardOverlay .ob-card{position:relative;background:var(--surface);border:1px solid var(--border);border-radius:14px;padding:22px 24px 18px;max-width:240px;box-shadow:0 8px 40px rgba(30,35,46,0.22);pointer-events:all;cursor:pointer;z-index:1;}
+#onboardOverlay .ob-arrow{position:absolute;top:-18px;right:32px;font-size:22px;line-height:1;color:var(--orange);font-family:'DM Sans',sans-serif;animation:arrowBob 1s ease-in-out infinite;}
+#onboardOverlay .ob-title{font-family:'Instrument Serif',serif;font-size:17px;color:var(--text);margin-bottom:6px;line-height:1.3;}
+#onboardOverlay .ob-body{font-family:'DM Sans',sans-serif;font-size:12.5px;color:var(--text-soft);font-weight:300;line-height:1.65;margin-bottom:14px;}
+#onboardOverlay .ob-body strong{color:var(--text);font-weight:500;}
+#onboardOverlay .ob-dismiss{font-family:'DM Sans',sans-serif;font-size:11px;color:var(--muted);letter-spacing:0.04em;text-align:center;display:block;}
+@keyframes arrowBob{0%,100%{transform:translateY(0);}50%{transform:translateY(-5px);}}
+
 /* ── RESPONSIVE ── */
 @media(max-width:720px){
   main{grid-template-columns:1fr;height:auto;}
@@ -213,19 +226,20 @@ textarea.form-input{resize:vertical;min-height:80px;line-height:1.6;}
 <header>
   <div class="brand">
     <div class="brand-name">Tailor It<span>!</span></div>
-    <div class="brand-divider"></div>
-    <div class="brand-sub">AI Resume Tailoring</div>
+    <div class="brand-meta">
+      <div class="brand-sub">AI Resume Tailoring</div>
+      <div style="width:1px;height:10px;background:var(--border2);flex-shrink:0;"></div>
+      <button class="creator-link" onclick="openCreator()">Know the Creator</button>
+    </div>
   </div>
   <div class="header-right">
-    <button class="creator-link" onclick="openCreator()">Know the Creator</button>
     <div class="avatar-wrap no-profile" id="avatarWrap">
       <button class="avatar-btn" id="avatarBtn" onclick="openProfile()" title="My Profile">
         <span id="avatarText">
-          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+          <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
         </span>
       </button>
       <span class="avatar-label">My Profile</span>
-      <span class="avatar-hint">↑ upload resume here</span>
     </div>
   </div>
 </header>
@@ -377,8 +391,11 @@ textarea.form-input{resize:vertical;min-height:80px;line-height:1.6;}
   <div class="creator-header">
     <div class="brand">
       <div class="brand-name">Tailor It<span style="color:var(--orange)">!</span></div>
-      <div class="brand-divider" style="display:block"></div>
-      <div class="brand-sub" style="display:block">Know the Creator</div>
+      <div class="brand-meta">
+        <div class="brand-sub">AI Resume Tailoring</div>
+        <div style="width:1px;height:10px;background:var(--border2);flex-shrink:0;"></div>
+        <div class="brand-sub">Know the Creator</div>
+      </div>
     </div>
     <button class="back-btn" onclick="closeCreator()">← Back</button>
   </div>
@@ -396,6 +413,17 @@ textarea.form-input{resize:vertical;min-height:80px;line-height:1.6;}
         <a href="https://www.linkedin.com/in/yashraj-vasishtha/" target="_blank" rel="noopener">LinkedIn ↗</a>
       </div>
     </div>
+  </div>
+</div>
+
+<!-- ══ ONBOARDING OVERLAY ══ -->
+<div id="onboardOverlay">
+  <div class="ob-backdrop" onclick="dismissOnboard()"></div>
+  <div class="ob-card" onclick="dismissOnboard()">
+    <div class="ob-arrow">↑</div>
+    <div class="ob-title">Start here</div>
+    <div class="ob-body">Click <strong>My Profile</strong> to upload your resume — PDF, Word, plain text, or a photo.<br/><br/>AI will read it and fill in all your details automatically.</div>
+    <span class="ob-dismiss">Click anywhere to continue</span>
   </div>
 </div>
 
@@ -967,9 +995,24 @@ document.getElementById('jdInput').addEventListener('keydown',e=>{
 });
 
 // ─────────────────────────────────────────────
+// ONBOARDING OVERLAY
+// ─────────────────────────────────────────────
+function dismissOnboard(){
+  const el = document.getElementById('onboardOverlay');
+  el.classList.add('hidden');
+  setTimeout(()=>{ el.style.display='none'; }, 360);
+  try{ localStorage.setItem('tailorit_onboard','1'); }catch(e){}
+}
+function initOnboard(){
+  try{ if(localStorage.getItem('tailorit_onboard')) { document.getElementById('onboardOverlay').style.display='none'; return; } }catch(e){}
+  // Already visible by default
+}
+
+// ─────────────────────────────────────────────
 // INIT
 // ─────────────────────────────────────────────
 loadProfile();
+initOnboard();
 </script>
 </body>
 </html>
