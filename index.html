@@ -31,6 +31,19 @@ header{display:flex;align-items:center;justify-content:space-between;padding:16p
 .avatar-btn:hover{border-color:var(--orange);}
 .avatar-btn.has-profile{background:var(--orange-lt);border-color:var(--orange);color:var(--orange);}
 
+/* ── AVATAR WRAP + ONBOARDING HINT ── */
+.avatar-wrap{display:flex;flex-direction:column;align-items:center;gap:3px;flex-shrink:0;}
+.avatar-label{font-size:9.5px;color:var(--muted);letter-spacing:0.04em;white-space:nowrap;transition:color 0.2s;}
+.avatar-hint{font-size:9px;color:var(--orange);white-space:nowrap;font-weight:500;letter-spacing:0.02em;opacity:0;pointer-events:none;line-height:1;}
+.avatar-wrap.no-profile .avatar-hint{opacity:1;animation:hintPulse 2.2s ease-in-out infinite;}
+.avatar-wrap.no-profile .avatar-btn{animation:avatarGlow 2.2s ease-in-out infinite;}
+.avatar-wrap.no-profile .avatar-label{color:var(--orange);}
+@keyframes avatarGlow{
+  0%,100%{box-shadow:0 0 0 0 rgba(232,98,10,0);border-color:var(--border);}
+  50%{box-shadow:0 0 0 5px rgba(232,98,10,0.18);border-color:var(--orange);}
+}
+@keyframes hintPulse{0%,100%{opacity:0.45;}50%{opacity:1;}}
+
 /* ── MAIN ── */
 main{flex:1;display:grid;grid-template-columns:1fr 1fr;height:calc(100vh - 65px);}
 .panel{display:flex;flex-direction:column;padding:22px 28px;overflow:hidden;}
@@ -205,11 +218,15 @@ textarea.form-input{resize:vertical;min-height:80px;line-height:1.6;}
   </div>
   <div class="header-right">
     <button class="creator-link" onclick="openCreator()">Know the Creator</button>
-    <button class="avatar-btn" id="avatarBtn" onclick="openProfile()" title="My Profile">
-      <span id="avatarText">
-        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
-      </span>
-    </button>
+    <div class="avatar-wrap no-profile" id="avatarWrap">
+      <button class="avatar-btn" id="avatarBtn" onclick="openProfile()" title="My Profile">
+        <span id="avatarText">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+        </span>
+      </button>
+      <span class="avatar-label">My Profile</span>
+      <span class="avatar-hint">↑ upload resume here</span>
+    </div>
   </div>
 </header>
 
@@ -281,9 +298,9 @@ textarea.form-input{resize:vertical;min-height:80px;line-height:1.6;}
     <!-- Upload -->
     <div class="upload-zone" id="uploadZone" onclick="document.getElementById('resumeFile').click()">
       <div class="upload-icon">📄</div>
-      <label>Upload Resume PDF to auto-fill</label>
-      <div class="upload-sub">AI will extract your details — you can review and edit</div>
-      <input type="file" id="resumeFile" accept=".pdf" onchange="handleResumeUpload(event)"/>
+      <label>Upload Resume to auto-fill</label>
+      <div class="upload-sub">PDF · Word (.docx) · Plain Text · Image — AI extracts your details</div>
+      <input type="file" id="resumeFile" accept=".pdf,.doc,.docx,.txt,.png,.jpg,.jpeg,.webp" onchange="handleResumeUpload(event)"/>
       <div class="parse-status" id="parseStatus"></div>
     </div>
 
@@ -383,6 +400,7 @@ textarea.form-input{resize:vertical;min-height:80px;line-height:1.6;}
 </div>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mammoth/1.6.0/mammoth.browser.min.js"></script>
 <script>
 if(typeof pdfjsLib!=='undefined')
   pdfjsLib.GlobalWorkerOptions.workerSrc='https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';
@@ -469,14 +487,17 @@ function clearProfile(){
 function updateAvatar(){
   const el = document.getElementById('avatarText');
   const btn = document.getElementById('avatarBtn');
+  const wrap = document.getElementById('avatarWrap');
   if(profileData.name){
     const parts = profileData.name.trim().split(/\s+/);
     const ini = parts.length>=2 ? parts[0][0]+parts[parts.length-1][0] : parts[0].slice(0,2);
     el.textContent = ini.toUpperCase();
     btn.classList.add('has-profile');
+    wrap.classList.remove('no-profile');
   } else {
     el.innerHTML=`<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>`;
     btn.classList.remove('has-profile');
+    wrap.classList.add('no-profile');
   }
   // Show/hide no-profile warning
   document.getElementById('noProfileWarn').style.display = profileData.name ? 'none' : 'block';
@@ -714,7 +735,7 @@ function focusFirst(containerId){
 }
 
 // ─────────────────────────────────────────────
-// PDF UPLOAD + PARSE
+// RESUME UPLOAD + PARSE  (PDF · DOCX · TXT · Image)
 // ─────────────────────────────────────────────
 function setParseStatus(msg, state){
   const el = document.getElementById('parseStatus');
@@ -724,27 +745,59 @@ function setParseStatus(msg, state){
 async function handleResumeUpload(event){
   const file = event.target.files?.[0];
   if(!file) return;
-  if(file.type!=='application/pdf'){ setParseStatus('Please upload a PDF file.','error'); return; }
-
   event.target.value = '';
 
-  if(typeof pdfjsLib==='undefined'){ setParseStatus('PDF library not loaded. Try refreshing.','error'); return; }
+  const name = file.name.toLowerCase();
+  const isPDF  = file.type === 'application/pdf' || name.endsWith('.pdf');
+  const isDOCX = name.endsWith('.docx') || name.endsWith('.doc');
+  const isTXT  = file.type === 'text/plain' || name.endsWith('.txt');
+  const isIMG  = /\.(png|jpe?g|webp)$/.test(name) || file.type.startsWith('image/');
 
-  setParseStatus('Extracting text from PDF…','loading');
+  if(!isPDF && !isDOCX && !isTXT && !isIMG){
+    setParseStatus('Unsupported file type. Use PDF, Word, TXT, or an image.','error'); return;
+  }
+
   try{
-    const buf = await file.arrayBuffer();
-    const pdf = await pdfjsLib.getDocument({data:buf}).promise;
-    let text = '';
-    for(let i=1;i<=pdf.numPages;i++){
-      const page = await pdf.getPage(i);
-      const content = await page.getTextContent();
-      text += content.items.map(it=>it.str).join(' ') + '\n';
+    let payload;
+
+    if(isPDF){
+      if(typeof pdfjsLib==='undefined'){ setParseStatus('PDF library not loaded. Try refreshing.','error'); return; }
+      setParseStatus('Extracting text from PDF…','loading');
+      const buf = await file.arrayBuffer();
+      const pdf = await pdfjsLib.getDocument({data:buf}).promise;
+      let text = '';
+      for(let i=1;i<=pdf.numPages;i++){
+        const page = await pdf.getPage(i);
+        const content = await page.getTextContent();
+        text += content.items.map(it=>it.str).join(' ') + '\n';
+      }
+      payload = { text: text.trim().slice(0,8000) };
+
+    } else if(isDOCX){
+      if(typeof mammoth==='undefined'){ setParseStatus('Word library not loaded. Try refreshing.','error'); return; }
+      setParseStatus('Extracting text from Word document…','loading');
+      const buf = await file.arrayBuffer();
+      const result = await mammoth.extractRawText({arrayBuffer: buf});
+      payload = { text: result.value.trim().slice(0,8000) };
+
+    } else if(isTXT){
+      setParseStatus('Reading text file…','loading');
+      const text = await file.text();
+      payload = { text: text.trim().slice(0,8000) };
+
+    } else if(isIMG){
+      setParseStatus('Uploading image for AI reading…','loading');
+      const buf = await file.arrayBuffer();
+      const b64 = btoa(String.fromCharCode(...new Uint8Array(buf)));
+      const mediaType = file.type || 'image/jpeg';
+      payload = { imageBase64: b64, imageType: mediaType };
     }
+
     setParseStatus('Parsing with AI…','loading');
     const res = await fetch('/api/parse-resume',{
       method:'POST',
       headers:{'Content-Type':'application/json'},
-      body: JSON.stringify({text: text.trim().slice(0,8000)})
+      body: JSON.stringify(payload)
     });
     const data = await res.json();
     if(!res.ok) throw new Error(data.error||'Parse failed');
