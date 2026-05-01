@@ -5,9 +5,13 @@ export default async function handler(req, res) {
   if (req.method === 'OPTIONS') return res.status(200).end();
   if (req.method !== 'POST') return res.status(405).json({ error: 'Method not allowed' });
 
-  const { text } = req.body;
-  if (!text || text.trim().length < 50)
-    return res.status(400).json({ error: 'Resume text too short or empty.' });
+  const { text, imageBase64, imageType } = req.body;
+
+  const hasText  = text && text.trim().length >= 50;
+  const hasImage = imageBase64 && imageType;
+
+  if(!hasText && !hasImage)
+    return res.status(400).json({ error: 'No resume content provided.' });
 
   const apiKey = process.env.ANTHROPIC_API_KEY;
   if (!apiKey)
@@ -42,6 +46,14 @@ Rules:
 - Return raw JSON only, nothing else`;
 
   try {
+    // Build the user message depending on input type
+    const userContent = hasImage
+      ? [
+          { type: 'image', source: { type: 'base64', media_type: imageType, data: imageBase64 } },
+          { type: 'text',  text: 'This is a resume image. Extract all information and return ONLY the JSON.' }
+        ]
+      : `Parse this resume:\n\n${text}`;
+
     const upstream = await fetch('https://api.anthropic.com/v1/messages', {
       method: 'POST',
       headers: {
@@ -53,7 +65,7 @@ Rules:
         model: 'claude-sonnet-4-6',
         max_tokens: 2500,
         system: SYSTEM,
-        messages: [{ role: 'user', content: `Parse this resume:\n\n${text}` }],
+        messages: [{ role: 'user', content: userContent }],
       }),
     });
 
