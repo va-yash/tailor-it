@@ -209,6 +209,27 @@ textarea.form-input{resize:vertical;min-height:80px;line-height:1.6;}
 #onboardOverlay .ob-dismiss{font-family:'DM Sans',sans-serif;font-size:11px;color:var(--muted);letter-spacing:0.04em;text-align:center;display:block;}
 @keyframes arrowBob{0%,100%{transform:translateY(0);}50%{transform:translateY(-5px);}}
 
+/* ── FEEDBACK MODAL ── */
+#feedbackBackdrop{position:fixed;inset:0;background:rgba(50,59,76,0.3);z-index:400;display:none;backdrop-filter:blur(2px);align-items:center;justify-content:center;}
+#feedbackBackdrop.open{display:flex;}
+#feedbackModal{background:var(--surface);border:1px solid var(--border);border-radius:14px;padding:28px 28px 22px;width:320px;max-width:calc(100vw - 32px);box-shadow:0 8px 40px rgba(50,59,76,0.14);display:flex;flex-direction:column;gap:16px;}
+.fb-title{font-family:'Instrument Serif',serif;font-size:18px;color:var(--text);line-height:1.2;}
+.fb-sub{font-size:12.5px;color:var(--muted);margin-top:2px;}
+.fb-emojis{display:flex;gap:10px;justify-content:center;}
+.fb-emoji{font-size:28px;background:var(--surface2);border:2px solid var(--border);border-radius:10px;width:60px;height:56px;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:border-color 0.15s,background 0.15s,transform 0.12s;line-height:1;}
+.fb-emoji:hover{border-color:var(--orange);background:var(--orange-lt);transform:scale(1.08);}
+.fb-emoji.selected{border-color:var(--orange);background:var(--orange-lt);}
+.fb-comment{width:100%;background:var(--bg);border:1px solid var(--border);border-radius:8px;padding:10px 12px;color:var(--text);font-family:'DM Sans',sans-serif;font-size:13px;font-weight:300;resize:none;outline:none;height:80px;line-height:1.6;transition:border-color 0.2s,box-shadow 0.2s;box-sizing:border-box;}
+.fb-comment::placeholder{color:var(--muted);}
+.fb-comment:focus{border-color:var(--orange);box-shadow:0 0 0 2px var(--orange-lt);}
+.fb-row{display:flex;gap:8px;justify-content:flex-end;align-items:center;}
+.fb-cancel{background:none;border:1px solid var(--border);border-radius:8px;padding:8px 16px;color:var(--muted);font-family:'DM Sans',sans-serif;font-size:13px;cursor:pointer;transition:border-color 0.15s,color 0.15s;}
+.fb-cancel:hover{border-color:var(--text);color:var(--text);}
+.fb-send{background:var(--orange);color:#fff;border:none;border-radius:8px;padding:8px 20px;font-family:'DM Sans',sans-serif;font-size:13px;font-weight:500;cursor:pointer;transition:background 0.15s;}
+.fb-send:hover:not(:disabled){background:var(--orange-dk);}
+.fb-send:disabled{opacity:0.45;cursor:not-allowed;}
+.fb-thanks{text-align:center;padding:12px 0 4px;font-size:14px;color:var(--text-soft);}
+
 /* ── RESPONSIVE ── */
 @media(max-width:720px){
   main{grid-template-columns:1fr;height:auto;}
@@ -230,6 +251,8 @@ textarea.form-input{resize:vertical;min-height:80px;line-height:1.6;}
       <div class="brand-sub">AI Resume Tailoring</div>
       <div style="width:1px;height:10px;background:var(--border2);flex-shrink:0;"></div>
       <button class="creator-link" onclick="openCreator()">Know the Creator</button>
+      <div style="width:1px;height:10px;background:var(--border2);flex-shrink:0;"></div>
+      <button class="creator-link" onclick="openFeedback()">Feedback</button>
     </div>
   </div>
   <div class="header-right">
@@ -1009,11 +1032,83 @@ function initOnboard(){
 }
 
 // ─────────────────────────────────────────────
+// FEEDBACK
+// ─────────────────────────────────────────────
+let selectedEmoji = null;
+function openFeedback(){
+  selectedEmoji=null;
+  document.querySelectorAll('.fb-emoji').forEach(b=>b.classList.remove('selected'));
+  document.getElementById('fbComment').value='';
+  document.getElementById('fbSendBtn').textContent='Send';
+  document.getElementById('fbSendBtn').disabled=false;
+  document.getElementById('feedbackBackdrop').classList.add('open');
+  document.body.style.overflow='hidden';
+}
+function closeFeedback(){
+  document.getElementById('feedbackBackdrop').classList.remove('open');
+  document.body.style.overflow='';
+}
+function handleFeedbackBackdrop(e){
+  if(e.target===document.getElementById('feedbackBackdrop')) closeFeedback();
+}
+function selectEmoji(val){
+  selectedEmoji=val;
+  document.querySelectorAll('.fb-emoji').forEach(b=>b.classList.remove('selected'));
+  document.getElementById('fb-'+val).classList.add('selected');
+}
+async function submitFeedback(){
+  const comment = document.getElementById('fbComment').value.trim();
+  if(!selectedEmoji && !comment){ alert('Please pick an emoji or leave a comment.'); return; }
+  const emojiMap = {sad:'😢 Not great', ok:'😐 It\'s okay', happy:'😊 Love it'};
+  const rating = selectedEmoji ? emojiMap[selectedEmoji] : '(no rating)';
+  const btn = document.getElementById('fbSendBtn');
+  btn.disabled=true; btn.textContent='Sending…';
+  try{
+    const res = await fetch('https://formspree.io/f/xojrepdz',{
+      method:'POST',
+      headers:{'Content-Type':'application/json','Accept':'application/json'},
+      body: JSON.stringify({ rating, comment: comment||'(no comment)' })
+    });
+    if(res.ok){
+      const modal = document.getElementById('feedbackModal');
+      modal.innerHTML='<div class="fb-thanks">✅ Thanks for your feedback!<br><span style="font-size:12px;color:var(--muted);margin-top:6px;display:block">It means a lot 🙏</span></div>';
+      setTimeout(closeFeedback, 1800);
+    } else {
+      btn.disabled=false; btn.textContent='Send';
+      alert('Something went wrong. Please try again.');
+    }
+  }catch{
+    btn.disabled=false; btn.textContent='Send';
+    alert('Network error. Please try again.');
+  }
+}
+
+// ─────────────────────────────────────────────
 // INIT
 // ─────────────────────────────────────────────
 loadProfile();
 initOnboard();
 </script>
+<!-- ══ FEEDBACK MODAL ══ -->
+<div id="feedbackBackdrop" onclick="handleFeedbackBackdrop(event)">
+  <div id="feedbackModal">
+    <div>
+      <div class="fb-title">Share your feedback</div>
+      <div class="fb-sub">How has your experience been?</div>
+    </div>
+    <div class="fb-emojis">
+      <button class="fb-emoji" id="fb-sad"  onclick="selectEmoji('sad')"     title="Not great">😢</button>
+      <button class="fb-emoji" id="fb-ok"   onclick="selectEmoji('ok')"      title="It's okay">😐</button>
+      <button class="fb-emoji" id="fb-happy" onclick="selectEmoji('happy')"  title="Love it">😊</button>
+    </div>
+    <textarea class="fb-comment" id="fbComment" placeholder="Any suggestions or thoughts? (optional)"></textarea>
+    <div class="fb-row">
+      <button class="fb-cancel" onclick="closeFeedback()">Cancel</button>
+      <button class="fb-send" id="fbSendBtn" onclick="submitFeedback()">Send</button>
+    </div>
+  </div>
+</div>
+
   <script defer src="/_vercel/insights/script.js"></script>
 </body>
 </html>
