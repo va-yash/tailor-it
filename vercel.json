@@ -1,7 +1,0 @@
-{
-  "functions": {
-    "api/generate.js":     { "maxDuration": 60 },
-    "api/parse-resume.js": { "maxDuration": 60 },
-    "api/parse-bundle.js": { "maxDuration": 60 }
-  }
-}
