@@ -230,83 +230,6 @@ textarea.form-input{resize:vertical;min-height:80px;line-height:1.6;}
 .fb-send:disabled{opacity:0.45;cursor:not-allowed;}
 .fb-thanks{text-align:center;padding:12px 0 4px;font-size:14px;color:var(--text-soft);}
 
-/* ── COVER LETTER ── */
-.fmt-btn.cover{color:var(--orange);font-weight:500;}
-.fmt-btn.cover.active{background:var(--orange);color:#fff;}
-.cover-controls{display:none;align-items:center;gap:8px 10px;flex-wrap:wrap;margin-bottom:12px;padding:9px 14px;background:var(--surface);border:1px solid var(--orange);border-radius:8px;box-shadow:var(--shadow);}
-.cover-controls.show{display:flex;}
-.cover-lbl{font-size:12.5px;color:var(--text);font-weight:500;white-space:nowrap;}
-.cover-hint{font-size:11px;color:var(--muted);margin-left:auto;white-space:nowrap;}
-.cover-words{width:62px;text-align:center;background:var(--bg);border:1px solid var(--border);border-radius:6px;padding:5px 6px;font-family:'DM Sans',sans-serif;font-size:13px;font-weight:500;color:var(--text);outline:none;}
-.cover-words:focus{border-color:var(--orange);}
-.cover-presets{display:flex;gap:5px;}
-.cw-preset{background:var(--surface2);border:1px solid var(--border);border-radius:5px;padding:4px 9px;font-family:'DM Sans',sans-serif;font-size:11.5px;color:var(--text-soft);cursor:pointer;transition:all 0.15s;}
-.cw-preset:hover,.cw-preset.on{border-color:var(--orange);color:var(--orange);background:var(--orange-lt);}
-
-/* letter rendered on a page, so it never looks like the resume output */
-.letter-paper{background:#fffdf9;border:1px solid var(--border);border-radius:6px;padding:38px 42px;box-shadow:0 2px 14px rgba(50,59,76,0.09);font-family:'Instrument Serif',Georgia,serif;font-size:15px;line-height:1.85;color:#2c3444;max-width:660px;margin:0 auto;}
-.letter-paper p{margin-bottom:15px;}
-.letter-paper p:last-child{margin-bottom:0;}
-.letter-subject{font-family:'DM Sans',sans-serif;font-size:12px;font-weight:600;letter-spacing:0.04em;text-transform:uppercase;color:var(--orange);padding-bottom:12px;margin-bottom:18px;border-bottom:1px solid var(--border2);}
-.letter-sign{margin-top:22px;padding-top:14px;border-top:1px solid var(--border2);}
-.letter-meta{display:flex;align-items:center;gap:10px;justify-content:center;margin-top:12px;font-size:11px;color:var(--muted);}
-.wc-ok{color:#2e8a4a;font-weight:500;}
-.wc-off{color:#c0392b;font-weight:500;}
-
-/* ── TOKEN / COST METER ── */
-.usage-bar{display:none;align-items:center;gap:14px;flex-wrap:wrap;margin-top:10px;padding:8px 12px;background:var(--surface2);border:1px solid var(--border2);border-radius:8px;font-size:11px;color:var(--muted);}
-.usage-bar.show{display:flex;}
-.usage-item{display:flex;align-items:center;gap:5px;white-space:nowrap;}
-.usage-item b{color:var(--text);font-weight:500;font-variant-numeric:tabular-nums;}
-.usage-sep{width:1px;height:12px;background:var(--border);flex-shrink:0;}
-.usage-cache{color:#2e8a4a;}
-.usage-total{margin-left:auto;color:var(--text-soft);}
-.usage-link{background:none;border:none;color:var(--orange);font-family:'DM Sans',sans-serif;font-size:11px;cursor:pointer;text-decoration:underline;text-underline-offset:2px;padding:0;}
-
-/* ── USAGE HISTORY ── */
-#usageBackdrop{position:fixed;inset:0;background:rgba(50,59,76,0.3);z-index:400;display:none;backdrop-filter:blur(2px);align-items:center;justify-content:center;}
-#usageBackdrop.open{display:flex;}
-#usageModal{background:var(--surface);border:1px solid var(--border);border-radius:14px;padding:24px;width:620px;max-width:calc(100vw - 32px);max-height:82vh;overflow-y:auto;box-shadow:0 8px 40px rgba(50,59,76,0.16);}
-.uh-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:16px;}
-.uh-title{font-family:'Instrument Serif',serif;font-size:20px;color:var(--text);}
-.uh-cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(112px,1fr));gap:9px;margin-bottom:18px;}
-.uh-card{background:var(--surface2);border:1px solid var(--border2);border-radius:8px;padding:11px 13px;}
-.uh-card .k{font-size:10px;letter-spacing:0.07em;text-transform:uppercase;color:var(--muted);margin-bottom:4px;}
-.uh-card .v{font-size:17px;color:var(--text);font-weight:500;font-variant-numeric:tabular-nums;}
-.uh-sec{font-size:10.5px;letter-spacing:0.09em;text-transform:uppercase;color:var(--muted);font-weight:500;margin:16px 0 8px;}
-table.uh-tbl{width:100%;border-collapse:collapse;font-size:12px;}
-table.uh-tbl th{text-align:left;font-weight:500;color:var(--muted);font-size:10px;letter-spacing:0.06em;text-transform:uppercase;padding:5px 8px;border-bottom:1px solid var(--border);}
-table.uh-tbl td{padding:6px 8px;border-bottom:1px solid var(--border2);color:var(--text-soft);font-variant-numeric:tabular-nums;}
-table.uh-tbl td.num{text-align:right;}
-table.uh-tbl tr:last-child td{border-bottom:none;}
-.uh-note{font-size:11.5px;color:var(--muted);line-height:1.6;margin-top:16px;padding-top:14px;border-top:1px solid var(--border2);}
-.uh-note a{color:var(--orange);}
-.uh-actions{display:flex;gap:8px;margin-top:16px;}
-.uh-btn{background:var(--surface2);border:1px solid var(--border);border-radius:7px;padding:7px 14px;font-family:'DM Sans',sans-serif;font-size:12.5px;color:var(--text-soft);cursor:pointer;transition:all 0.15s;}
-.uh-btn:hover{border-color:var(--orange);color:var(--orange);}
-
-/* ── MODEL BADGE ── */
-.model-badge{display:flex;align-items:center;gap:6px;font-size:10.5px;color:var(--muted);white-space:nowrap;}
-.model-badge b{color:var(--text-soft);font-weight:500;}
-.model-dot{width:6px;height:6px;border-radius:50%;background:#2e8a4a;flex-shrink:0;}
-.model-dot.off{background:#c0392b;}
-
-/* ── ZIP / BULK IMPORT ── */
-.upload-modes{display:flex;gap:8px;margin-bottom:10px;}
-.upload-mode{flex:1;padding:7px 10px;font-family:'DM Sans',sans-serif;font-size:12px;font-weight:400;color:var(--muted);background:var(--surface2);border:1px solid var(--border);border-radius:7px;cursor:pointer;transition:all 0.15s;text-align:center;}
-.upload-mode.active{background:var(--surface);color:var(--text);font-weight:500;border-color:var(--orange);box-shadow:var(--shadow);}
-.bulk-progress{display:none;margin-top:12px;}
-.bulk-progress.show{display:block;}
-.bulk-track{height:5px;background:var(--surface2);border:1px solid var(--border2);border-radius:4px;overflow:hidden;}
-.bulk-fill{height:100%;width:0%;background:var(--orange);transition:width 0.35s ease;}
-.bulk-meta{display:flex;justify-content:space-between;font-size:11px;color:var(--muted);margin-top:6px;}
-.bulk-files{max-height:118px;overflow-y:auto;margin-top:10px;border:1px solid var(--border2);border-radius:7px;background:var(--surface);scrollbar-width:thin;}
-.bulk-file{display:flex;align-items:center;gap:7px;padding:5px 10px;font-size:11.5px;color:var(--text-soft);border-bottom:1px solid var(--border2);text-align:left;}
-.bulk-file:last-child{border-bottom:none;}
-.bulk-file .bf-name{flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
-.bulk-file .bf-stat{font-size:10.5px;flex-shrink:0;}
-.bf-ok{color:#2e8a4a;}.bf-skip{color:var(--muted);}.bf-err{color:#c0392b;}
-
 /* ── RESPONSIVE ── */
 @media(max-width:720px){
   main{grid-template-columns:1fr;height:auto;}
@@ -330,10 +253,6 @@ table.uh-tbl tr:last-child td{border-bottom:none;}
       <button class="creator-link" onclick="openCreator()">Know the Creator</button>
       <div style="width:1px;height:10px;background:var(--border2);flex-shrink:0;"></div>
       <button class="creator-link" onclick="openFeedback()">Feedback</button>
-      <div style="width:1px;height:10px;background:var(--border2);flex-shrink:0;"></div>
-      <div class="model-badge" id="modelBadge" title="Model this deployment is running. Change it with the GENERATE_MODEL environment variable.">
-        <span class="model-dot off" id="modelDot"></span><b id="modelName">checking…</b>
-      </div>
     </div>
   </div>
   <div class="header-right">
@@ -356,21 +275,7 @@ table.uh-tbl tr:last-child td{border-bottom:none;}
     <div class="panel-label">Paste Job Description</div>
     <div class="fmt-toggle">
       <button class="fmt-btn active" id="fmtRendered" onclick="setFormat('standard')">Rendered</button>
-      <button class="fmt-btn" id="fmtLatex" onclick="setFormat('latex')">LaTeX · 1 col</button>
-      <button class="fmt-btn" id="fmtLatex2" onclick="setFormat('latex2col')">LaTeX · 2 col</button>
-      <button class="fmt-btn cover" id="fmtCover" onclick="setFormat('coverletter')">✉ Cover Letter</button>
-    </div>
-    <div class="cover-controls" id="coverControls">
-      <span class="cover-lbl">Letter length</span>
-      <input class="cover-words" id="coverWords" type="number" min="120" max="500" step="10" value="250"
-             oninput="setCoverWords(this.value)"/>
-      <span class="cover-lbl" style="font-weight:400;color:var(--text-soft)">words</span>
-      <div class="cover-presets">
-        <button class="cw-preset" onclick="setCoverWords(180,true)">Short</button>
-        <button class="cw-preset on" onclick="setCoverWords(250,true)">Standard</button>
-        <button class="cw-preset" onclick="setCoverWords(350,true)">Detailed</button>
-      </div>
-      <span class="cover-hint">120–500</span>
+      <button class="fmt-btn" id="fmtLatex" onclick="setFormat('latex')">LaTeX</button>
     </div>
     <div class="no-profile-warn" id="noProfileWarn">
       ⚠ No profile set up — click the avatar icon to add your details for personalised results.
@@ -383,17 +288,6 @@ table.uh-tbl tr:last-child td{border-bottom:none;}
       </button>
       <button class="btn-copy" id="copyBtn" onclick="copyOutput()">Copy</button>
       <span class="hint">⌘ Enter to generate</span>
-    </div>
-    <div class="usage-bar" id="usageBar">
-      <span class="usage-item" title="Model that produced this resume">⚙ <b id="uModel">—</b></span>
-      <span class="usage-sep"></span>
-      <span class="usage-item" title="Input tokens billed at full rate">In <b id="uIn">0</b></span>
-      <span class="usage-item usage-cache" title="Input tokens served from cache at ~10% of the input price">Cached <b id="uCache">0</b></span>
-      <span class="usage-item" title="Output tokens generated">Out <b id="uOut">0</b></span>
-      <span class="usage-sep"></span>
-      <span class="usage-item" title="Cost of this single generation">This run <b id="uCost">$0.0000</b></span>
-      <span class="usage-item usage-total" title="Total spent since you opened this tab">Session: <b id="uTotal">$0.0000</b> over <b id="uRuns">0</b> runs</span>
-      <button class="usage-link" onclick="openUsage()">All time ↗</button>
     </div>
   </div>
 
@@ -418,15 +312,6 @@ table.uh-tbl tr:last-child td{border-bottom:none;}
           <pre id="latexCode"></pre>
         </div>
       </div>
-      <div id="coverOutput" style="display:none">
-        <div id="coverScore"></div>
-        <div class="letter-paper" id="letterPaper"></div>
-        <div class="letter-meta">
-          <span>Word count: <span id="letterWc">—</span></span>
-          <span class="usage-sep"></span>
-          <span>Target: <span id="letterTarget">250</span></span>
-        </div>
-      </div>
     </div>
   </div>
 
@@ -448,26 +333,12 @@ table.uh-tbl tr:last-child td{border-bottom:none;}
   <div class="drawer-body">
 
     <!-- Upload -->
-    <div style="margin-bottom:20px">
-      <div class="upload-modes">
-        <button class="upload-mode active" id="modeSingle" onclick="setUploadMode('single')">Single resume</button>
-        <button class="upload-mode" id="modeBulk" onclick="setUploadMode('bulk')">Bulk import</button>
-      </div>
-      <div class="upload-zone" id="uploadZone" onclick="triggerUpload()">
-        <div class="upload-icon" id="uploadIcon">📄</div>
-        <label id="uploadLabel">Upload Resume to auto-fill</label>
-        <div class="upload-sub" id="uploadSub">PDF · Word (.docx) · Plain Text · Image — AI extracts your details</div>
-        <input type="file" id="resumeFile" accept=".pdf,.doc,.docx,.txt,.png,.jpg,.jpeg,.webp" onchange="handleResumeUpload(event)"/>
-        <div class="parse-status" id="parseStatus"></div>
-        <div class="bulk-progress" id="bulkProgress">
-          <div class="bulk-track"><div class="bulk-fill" id="bulkFill"></div></div>
-          <div class="bulk-meta">
-            <span id="bulkStage">Reading files…</span>
-            <span id="bulkCount">0 / 0</span>
-          </div>
-          <div class="bulk-files" id="bulkFiles"></div>
-        </div>
-      </div>
+    <div class="upload-zone" id="uploadZone" onclick="document.getElementById('resumeFile').click()">
+      <div class="upload-icon">📄</div>
+      <label>Upload Resume to auto-fill</label>
+      <div class="upload-sub">PDF · Word (.docx) · Plain Text · Image — AI extracts your details</div>
+      <input type="file" id="resumeFile" accept=".pdf,.doc,.docx,.txt,.png,.jpg,.jpeg,.webp" onchange="handleResumeUpload(event)"/>
+      <div class="parse-status" id="parseStatus"></div>
     </div>
 
     <!-- Basic Info -->
@@ -478,10 +349,7 @@ table.uh-tbl tr:last-child td{border-bottom:none;}
         <input class="form-input" id="pLocation" placeholder="Location (e.g. London, UK)"/>
         <input class="form-input" id="pEmail" placeholder="Email"/>
         <input class="form-input" id="pPhone" placeholder="Phone"/>
-        <input class="form-input full" id="pLinkedin" placeholder="LinkedIn URL"/>
-        <input class="form-input full" id="pAvailability" placeholder="Availability — e.g. Available from March 2026 · 1 month notice"/>
       </div>
-      <div class="pref-sub" style="margin-top:6px">Availability is placed as the last sentence of your profile summary.</div>
     </div>
 
     <!-- Education -->
@@ -511,16 +379,9 @@ table.uh-tbl tr:last-child td{border-bottom:none;}
       <div id="projectList"><p class="empty-hint">No projects added yet</p></div>
     </div>
 
-    <!-- Interpersonal Skills (listed first — mirrors the CV, where Airbus reads these first) -->
+    <!-- Skills -->
     <div class="profile-section">
-      <div class="section-hd"><span class="section-title">Interpersonal Skills</span></div>
-      <textarea class="form-input" id="pSoftSkills" placeholder="e.g. Cross-team coordination, clear written handovers, mentoring juniors, working with suppliers…"></textarea>
-      <div class="pref-sub" style="margin-top:6px">Printed above technical skills on the CV. Leave blank and the AI will infer them from your experience.</div>
-    </div>
-
-    <!-- Technical Skills -->
-    <div class="profile-section">
-      <div class="section-hd"><span class="section-title">Technical Skills</span></div>
+      <div class="section-hd"><span class="section-title">Skills</span></div>
       <textarea class="form-input" id="pSkills" placeholder="Paste your skills — e.g. Python, Power BI, SAP-MM, CS-25, EASA/FAA…"></textarea>
     </div>
 
@@ -579,7 +440,7 @@ table.uh-tbl tr:last-child td{border-bottom:none;}
 </div>
 
 <!-- ══ ONBOARDING OVERLAY ══ -->
-<div id="onboardOverlay" style="display:none">
+<div id="onboardOverlay">
   <div class="ob-backdrop" onclick="dismissOnboard()"></div>
   <div class="ob-card" onclick="dismissOnboard()">
     <div class="ob-arrow">↑</div>
@@ -591,7 +452,6 @@ table.uh-tbl tr:last-child td{border-bottom:none;}
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/mammoth/1.6.0/mammoth.browser.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
 <script>
 if(typeof pdfjsLib!=='undefined')
   pdfjsLib.GlobalWorkerOptions.workerSrc='https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';
@@ -603,26 +463,18 @@ let _uid = 1;
 const uid = () => _uid++;
 
 let profileData = {
-  name:'', email:'', phone:'', location:'', linkedin:'', availability:'',
+  name:'', email:'', phone:'', location:'',
   education:[],   // {id, degree, institution, dates}
   experience:[],  // {id, title, company, location, dates, bullets:[]}
   projects:[],    // {id, name, org, dates, keywords}
-  skills:'', softSkills:'',
+  skills:'',
   achievements:[], // {id, text}
   languages:'',
-  prefs:{ bulletCounts:[], projectCount:3, coverWords:250, extraSections:[] }
-};
-
-// Every plain-text field, so save/load/clear stay in sync as fields are added.
-const TEXT_FIELDS = {
-  pName:'name', pEmail:'email', pPhone:'phone', pLocation:'location',
-  pLinkedin:'linkedin', pAvailability:'availability',
-  pSkills:'skills', pSoftSkills:'softSkills', pLanguages:'languages'
+  prefs:{ bulletCounts:[], projectCount:3, extraSections:[] }
 };
 
 let currentFormat = 'standard';
-let cachedScore = null;  // locked so all three formats report the same score
-let scoredJd   = '';     // the JD that score belongs to — see syncCachedScore()
+let cachedScore = null; // locked after first generation so both formats agree
 
 // ─────────────────────────────────────────────
 // LOAD / SAVE profile
@@ -634,8 +486,7 @@ function loadProfile(){
     const p = JSON.parse(raw);
     profileData = {
       name: p.name||'', email: p.email||'', phone: p.phone||'', location: p.location||'',
-      linkedin: p.linkedin||'', availability: p.availability||'',
-      skills: p.skills||'', softSkills: p.softSkills||'', languages: p.languages||'',
+      skills: p.skills||'', languages: p.languages||'',
       education: (p.education||[]).map(e=>({id:uid(),degree:e.degree||'',institution:e.institution||'',dates:e.dates||''})),
       experience: (p.experience||[]).map(e=>({id:uid(),title:e.title||'',company:e.company||'',location:e.location||'',dates:e.dates||'',bullets:(e.bullets||[])})),
       projects: (p.projects||[]).map(x=>({id:uid(),name:x.name||'',org:x.org||'',dates:x.dates||'',keywords:x.keywords||''})),
@@ -643,7 +494,6 @@ function loadProfile(){
       prefs: {
         bulletCounts: Array.isArray(p.prefs?.bulletCounts) ? p.prefs.bulletCounts : [],
         projectCount: typeof p.prefs?.projectCount === 'number' ? p.prefs.projectCount : 3,
-        coverWords:   typeof p.prefs?.coverWords   === 'number' ? p.prefs.coverWords   : 250,
         extraSections: Array.isArray(p.prefs?.extraSections) ? p.prefs.extraSections.map(s=>({id:uid(),title:s.title||'',content:s.content||''})) : []
       }
     };
@@ -651,25 +501,14 @@ function loadProfile(){
   updateAvatar();
 }
 
-// Pull the free-text inputs into profileData. Repeated entries (education,
-// bullets…) already write through on every keystroke; these fields did not,
-// which meant typing a name and hitting Generate without saving sent an empty
-// name to the API. Both save and generate now call this first.
-function syncFormToData(){
-  for(const [id, key] of Object.entries(TEXT_FIELDS)){
-    const el = document.getElementById(id);
-    if(el) profileData[key] = el.value.trim();
-  }
-}
-
 function saveProfile(){
-  syncFormToData();
-  try{
-    localStorage.setItem('tailorit_profile', JSON.stringify(profileData));
-  }catch(e){
-    alert('Could not save your profile — browser storage is full. Try removing a few old roles.');
-    return;
-  }
+  profileData.name     = document.getElementById('pName').value.trim();
+  profileData.email    = document.getElementById('pEmail').value.trim();
+  profileData.phone    = document.getElementById('pPhone').value.trim();
+  profileData.location = document.getElementById('pLocation').value.trim();
+  profileData.skills   = document.getElementById('pSkills').value.trim();
+  profileData.languages= document.getElementById('pLanguages').value.trim();
+  localStorage.setItem('tailorit_profile', JSON.stringify(profileData));
   updateAvatar();
   const btn = document.getElementById('saveProfileBtn');
   const orig = btn.textContent;
@@ -681,12 +520,11 @@ function clearProfile(){
   if(!confirm('Clear all profile data? This cannot be undone.')) return;
   localStorage.removeItem('tailorit_profile');
   profileData = {
-    name:'', email:'', phone:'', location:'', linkedin:'', availability:'',
+    name:'', email:'', phone:'', location:'',
     education:[], experience:[], projects:[],
-    skills:'', softSkills:'', achievements:[], languages:'',
-    prefs:{ bulletCounts:[], projectCount:3, coverWords:250, extraSections:[] }
+    skills:'', achievements:[], languages:'',
+    prefs:{ bulletCounts:[], projectCount:3, extraSections:[] }
   };
-  cachedScore = null; scoredJd = '';
   renderProfileForm();
   updateAvatar();
   const btn = document.getElementById('saveProfileBtn');
@@ -732,18 +570,16 @@ function closeProfile(){
 }
 
 function renderProfileForm(){
-  for(const [id, key] of Object.entries(TEXT_FIELDS)){
-    const el = document.getElementById(id);
-    if(el) el.value = profileData[key] || '';
-  }
+  document.getElementById('pName').value = profileData.name;
+  document.getElementById('pEmail').value = profileData.email;
+  document.getElementById('pPhone').value = profileData.phone;
+  document.getElementById('pLocation').value = profileData.location;
+  document.getElementById('pSkills').value = profileData.skills;
+  document.getElementById('pLanguages').value = profileData.languages;
   renderEducation(); renderExperience(); renderProjects(); renderAchievements(); renderPrefs();
 }
 
-// & must be escaped first, otherwise the ampersands introduced by the later
-// replacements get double-escaped and a literal "&amp;" appears in the field.
-const esc = s => (s||'')
-  .replace(/&/g,'&amp;').replace(/"/g,'&quot;')
-  .replace(/</g,'&lt;').replace(/>/g,'&gt;');
+const esc = s => (s||'').replace(/"/g,'&quot;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
 
 // ─────────────────────────────────────────────
 // EDUCATION
@@ -945,13 +781,8 @@ function removeItem(section, id){
   renders[section]?.();
   if(section === 'experience' || section === 'projects') renderPrefs();
 }
-// Focus the entry that was just added, not the first one on the list. Adding a
-// third role used to bounce the cursor back up to role one.
 function focusFirst(containerId){
-  setTimeout(()=>{
-    const cards = document.getElementById(containerId)?.querySelectorAll('.entry-card, .erow');
-    cards?.[cards.length-1]?.querySelector('input')?.focus();
-  },30);
+  setTimeout(()=>{ document.getElementById(containerId)?.querySelector('input')?.focus(); },30);
 }
 
 // ─────────────────────────────────────────────
@@ -961,513 +792,71 @@ function setParseStatus(msg, state){
   const el = document.getElementById('parseStatus');
   el.textContent = msg; el.className = `parse-status ${state}`;
 }
-// ─────────────────────────────────────────────
-// UPLOAD MODE  (single resume  ·  bulk ZIP / many files)
-// ─────────────────────────────────────────────
-let uploadMode = 'single';
 
-const ACCEPT_SINGLE = '.pdf,.doc,.docx,.txt,.png,.jpg,.jpeg,.webp';
-const ACCEPT_BULK   = '.zip,.pdf,.doc,.docx,.txt';
-
-function setUploadMode(mode){
-  uploadMode = mode;
-  const bulk = mode === 'bulk';
-  document.getElementById('modeSingle').classList.toggle('active', !bulk);
-  document.getElementById('modeBulk').classList.toggle('active', bulk);
-  document.getElementById('uploadIcon').textContent = bulk ? '🗂️' : '📄';
-  document.getElementById('uploadLabel').textContent = bulk
-    ? 'Drop a ZIP of your old resumes'
-    : 'Upload Resume to auto-fill';
-  document.getElementById('uploadSub').textContent = bulk
-    ? 'ZIP · or select many PDFs / Word / TXT at once — every version is merged into one master profile'
-    : 'PDF · Word (.docx) · Plain Text · Image — AI extracts your details';
-  const input = document.getElementById('resumeFile');
-  input.accept = bulk ? ACCEPT_BULK : ACCEPT_SINGLE;
-  input.multiple = bulk;
-  document.getElementById('bulkProgress').classList.remove('show');
-  document.getElementById('parseStatus').className = 'parse-status';
-}
-
-function triggerUpload(){ document.getElementById('resumeFile').click(); }
-
-// ─────────────────────────────────────────────
-// FILE → TEXT
-// ─────────────────────────────────────────────
-
-// Spreading a multi-megabyte Uint8Array into String.fromCharCode overflows the
-// call stack, so a photo of a resume used to fail with an opaque error.
-// Convert in fixed-size chunks instead.
-function bufToBase64(buf){
-  const bytes = new Uint8Array(buf);
-  const CHUNK = 0x8000;
-  let binary = '';
-  for(let i = 0; i < bytes.length; i += CHUNK){
-    binary += String.fromCharCode.apply(null, bytes.subarray(i, i + CHUNK));
-  }
-  return btoa(binary);
-}
-
-function classify(filename, mime){
-  const n = (filename || '').toLowerCase();
-  if(n.endsWith('.zip')  || mime === 'application/zip') return 'zip';
-  if(n.endsWith('.pdf')  || mime === 'application/pdf') return 'pdf';
-  if(n.endsWith('.docx') || n.endsWith('.doc'))         return 'docx';
-  if(n.endsWith('.txt')  || mime === 'text/plain')      return 'txt';
-  if(/\.(png|jpe?g|webp)$/.test(n) || (mime || '').startsWith('image/')) return 'img';
-  return 'other';
-}
-
-async function pdfToText(arrayBuffer){
-  if(typeof pdfjsLib === 'undefined') throw new Error('PDF library not loaded. Refresh the page.');
-  const pdf = await pdfjsLib.getDocument({data: arrayBuffer}).promise;
-  let text = '';
-  for(let i = 1; i <= pdf.numPages; i++){
-    const page = await pdf.getPage(i);
-    const content = await page.getTextContent();
-    text += content.items.map(it => it.str).join(' ') + '\n';
-  }
-  return text.trim();
-}
-
-async function docxToText(arrayBuffer){
-  if(typeof mammoth === 'undefined') throw new Error('Word library not loaded. Refresh the page.');
-  const result = await mammoth.extractRawText({arrayBuffer});
-  return (result.value || '').trim();
-}
-
-// ─────────────────────────────────────────────
-// ENTRY POINT
-// ─────────────────────────────────────────────
 async function handleResumeUpload(event){
-  const files = Array.from(event.target.files || []);
+  const file = event.target.files?.[0];
+  if(!file) return;
   event.target.value = '';
-  if(!files.length) return;
 
-  if(uploadMode === 'bulk') return handleBulkUpload(files);
-  return handleSingleUpload(files[0]);
-}
+  const name = file.name.toLowerCase();
+  const isPDF  = file.type === 'application/pdf' || name.endsWith('.pdf');
+  const isDOCX = name.endsWith('.docx') || name.endsWith('.doc');
+  const isTXT  = file.type === 'text/plain' || name.endsWith('.txt');
+  const isIMG  = /\.(png|jpe?g|webp)$/.test(name) || file.type.startsWith('image/');
 
-// ── SINGLE ──
-async function handleSingleUpload(file){
-  const kind = classify(file.name, file.type);
-
-  if(kind === 'zip'){
-    setParseStatus('That is a ZIP — switch to Bulk import to read it.','error'); return;
-  }
-  if(kind === 'other'){
+  if(!isPDF && !isDOCX && !isTXT && !isIMG){
     setParseStatus('Unsupported file type. Use PDF, Word, TXT, or an image.','error'); return;
-  }
-  if(file.size > 12 * 1024 * 1024){
-    setParseStatus('File is too large (max 12MB).','error'); return;
   }
 
   try{
     let payload;
-    if(kind === 'img'){
-      setParseStatus('Reading image…','loading');
-      if(file.size > 3 * 1024 * 1024)
-        throw new Error('Image too large — use one under 3MB, or upload the PDF instead.');
-      payload = { imageBase64: bufToBase64(await file.arrayBuffer()), imageType: file.type || 'image/jpeg' };
-    } else {
-      setParseStatus('Extracting text…','loading');
-      const text = kind === 'pdf'  ? await pdfToText(await file.arrayBuffer())
-                 : kind === 'docx' ? await docxToText(await file.arrayBuffer())
-                 :                   (await file.text()).trim();
-      if(text.length < 50)
-        throw new Error('Could not read any text from that file. If it is a scan, upload it as an image.');
-      payload = { text: text.slice(0, 20000) };
+
+    if(isPDF){
+      if(typeof pdfjsLib==='undefined'){ setParseStatus('PDF library not loaded. Try refreshing.','error'); return; }
+      setParseStatus('Extracting text from PDF…','loading');
+      const buf = await file.arrayBuffer();
+      const pdf = await pdfjsLib.getDocument({data:buf}).promise;
+      let text = '';
+      for(let i=1;i<=pdf.numPages;i++){
+        const page = await pdf.getPage(i);
+        const content = await page.getTextContent();
+        text += content.items.map(it=>it.str).join(' ') + '\n';
+      }
+      payload = { text: text.trim().slice(0,8000) };
+
+    } else if(isDOCX){
+      if(typeof mammoth==='undefined'){ setParseStatus('Word library not loaded. Try refreshing.','error'); return; }
+      setParseStatus('Extracting text from Word document…','loading');
+      const buf = await file.arrayBuffer();
+      const result = await mammoth.extractRawText({arrayBuffer: buf});
+      payload = { text: result.value.trim().slice(0,8000) };
+
+    } else if(isTXT){
+      setParseStatus('Reading text file…','loading');
+      const text = await file.text();
+      payload = { text: text.trim().slice(0,8000) };
+
+    } else if(isIMG){
+      setParseStatus('Uploading image for AI reading…','loading');
+      const buf = await file.arrayBuffer();
+      const b64 = btoa(String.fromCharCode(...new Uint8Array(buf)));
+      const mediaType = file.type || 'image/jpeg';
+      payload = { imageBase64: b64, imageType: mediaType };
     }
 
     setParseStatus('Parsing with AI…','loading');
-    const res  = await fetch('/api/parse-resume',{
-      method:'POST', headers:{'Content-Type':'application/json'}, body: JSON.stringify(payload)
+    const res = await fetch('/api/parse-resume',{
+      method:'POST',
+      headers:{'Content-Type':'application/json'},
+      body: JSON.stringify(payload)
     });
     const data = await res.json();
-    if(!res.ok) throw new Error(data.error || 'Parse failed');
-
+    if(!res.ok) throw new Error(data.error||'Parse failed');
     applyParsedProfile(data.profile);
-    if(data.usage) recordUsage(data.usage, 'parse resume');
     setParseStatus('✓ Profile auto-filled! Review and save.','success');
   }catch(err){
-    setParseStatus('⚠ ' + err.message,'error');
+    setParseStatus(`⚠ ${err.message}`,'error');
   }
-}
-
-// ─────────────────────────────────────────────
-// BULK IMPORT
-// ─────────────────────────────────────────────
-const MAX_BULK_FILES = 40;
-
-function bulkUI(show){ document.getElementById('bulkProgress').classList.toggle('show', show); }
-function bulkStage(msg){ document.getElementById('bulkStage').textContent = msg; }
-function bulkCount(done, total){
-  document.getElementById('bulkCount').textContent = done + ' / ' + total;
-  document.getElementById('bulkFill').style.width = total ? (done/total*100).toFixed(1)+'%' : '0%';
-}
-function bulkRow(name, status, cls){
-  const row = document.createElement('div');
-  row.className = 'bulk-file';
-  row.innerHTML = '<span class="bf-name"></span><span class="bf-stat ' + cls + '"></span>';
-  row.querySelector('.bf-name').textContent = name;
-  row.querySelector('.bf-stat').textContent = status;
-  const box = document.getElementById('bulkFiles');
-  box.appendChild(row);
-  box.scrollTop = box.scrollHeight;
-  return row;
-}
-
-/** Expand any ZIPs, returning a flat list of {name, kind, buffer|text}. */
-async function expandFiles(files){
-  const out = [];
-  for(const f of files){
-    if(classify(f.name, f.type) !== 'zip'){ out.push({name: f.name, file: f}); continue; }
-
-    if(typeof JSZip === 'undefined') throw new Error('ZIP library not loaded. Refresh the page.');
-    bulkStage('Opening ' + f.name + '…');
-    const zip = await JSZip.loadAsync(await f.arrayBuffer());
-    for(const path of Object.keys(zip.files)){
-      const entry = zip.files[path];
-      // Skip folders, macOS resource forks, and hidden files.
-      if(entry.dir) continue;
-      const base = path.split('/').pop();
-      if(!base || base.startsWith('.') || path.startsWith('__MACOSX/')) continue;
-      out.push({name: base, zipEntry: entry});
-    }
-  }
-  return out;
-}
-
-async function handleBulkUpload(rawFiles){
-  document.getElementById('bulkFiles').innerHTML = '';
-  bulkUI(true);
-  bulkCount(0, 0);
-  setParseStatus('','');
-
-  let items;
-  try{
-    bulkStage('Reading files…');
-    items = await expandFiles(rawFiles);
-  }catch(err){
-    bulkUI(false); setParseStatus('⚠ ' + err.message,'error'); return;
-  }
-
-  // Keep only things we can turn into text, and tell the user what we dropped.
-  const usable = [];
-  for(const it of items){
-    const kind = classify(it.name, it.file?.type);
-    if(kind === 'pdf' || kind === 'docx' || kind === 'txt'){ usable.push({...it, kind}); }
-    else if(kind === 'img'){ bulkRow(it.name, 'skipped — image', 'bf-skip'); }
-    else { bulkRow(it.name, 'skipped — unsupported', 'bf-skip'); }
-  }
-
-  if(!usable.length){
-    bulkUI(false);
-    setParseStatus('⚠ No readable resumes found. Bulk import handles PDF, Word and TXT.','error');
-    return;
-  }
-
-  const capped = usable.slice(0, MAX_BULK_FILES);
-  const dropped = usable.length - capped.length;
-  if(dropped > 0) bulkRow(dropped + ' more file(s)', 'skipped — over ' + MAX_BULK_FILES + ' file limit', 'bf-skip');
-
-  // ── STEP 1: extract text locally (free, no API calls) ──
-  bulkStage('Extracting text…');
-  let done = 0;
-  const docs = [];
-  for(const it of capped){
-    bulkCount(done, capped.length);
-    try{
-      let text;
-      if(it.zipEntry){
-        text = it.kind === 'pdf'  ? await pdfToText(await it.zipEntry.async('arraybuffer'))
-             : it.kind === 'docx' ? await docxToText(await it.zipEntry.async('arraybuffer'))
-             :                      (await it.zipEntry.async('string')).trim();
-      } else {
-        text = it.kind === 'pdf'  ? await pdfToText(await it.file.arrayBuffer())
-             : it.kind === 'docx' ? await docxToText(await it.file.arrayBuffer())
-             :                      (await it.file.text()).trim();
-      }
-      if(!text || text.length < 80){ bulkRow(it.name, 'skipped — no text', 'bf-skip'); }
-      else { docs.push({name: it.name, text: text.slice(0, 18000)}); }
-    }catch(err){
-      bulkRow(it.name, 'failed to read', 'bf-err');
-    }
-    done++; bulkCount(done, capped.length);
-  }
-
-  if(!docs.length){
-    bulkUI(false);
-    setParseStatus('⚠ None of those files contained readable text. Scanned PDFs need to go in one at a time as images.','error');
-    return;
-  }
-
-  // ── STEP 2: parse each resume on its own ──
-  // One small request per resume rather than one giant one. Each finishes well
-  // inside the function time limit, a single bad file cannot sink the batch,
-  // and three run at a time so a stack of 30 does not take all afternoon.
-  bulkStage('Reading ' + docs.length + ' resume' + (docs.length===1?'':'s') + ' with AI…');
-  let parsedCount = 0;
-  bulkCount(0, docs.length);
-
-  const parsed = [];
-  const CONCURRENCY = 3;
-  let cursor = 0;
-
-  async function worker(){
-    while(cursor < docs.length){
-      const d = docs[cursor++];
-      try{
-        const res = await fetch('/api/parse-resume',{
-          method:'POST', headers:{'Content-Type':'application/json'},
-          body: JSON.stringify({text: d.text})
-        });
-        const data = await res.json();
-        if(!res.ok) throw new Error(data.error || 'parse failed');
-        parsed.push(data.profile);
-        if(data.usage) recordUsage(data.usage, 'bulk parse');
-        bulkRow(d.name, 'read ✓', 'bf-ok');
-      }catch(err){
-        bulkRow(d.name, 'failed — ' + err.message.slice(0,40), 'bf-err');
-      }
-      parsedCount++; bulkCount(parsedCount, docs.length);
-    }
-  }
-  await Promise.all(Array.from({length: Math.min(CONCURRENCY, docs.length)}, worker));
-
-  if(!parsed.length){
-    bulkUI(false);
-    setParseStatus('⚠ Every file failed to parse. Check your connection and try again.','error');
-    return;
-  }
-
-  // ── STEP 3: merge locally ──
-  // Deterministic, instant, and free. The union of every bullet you have ever
-  // written is exactly what the tailoring step wants to choose from.
-  bulkStage('Merging into one master profile…');
-  const merged = mergeProfiles(parsed);
-  applyParsedProfile(merged);
-
-  const roles   = (merged.experience || []).length;
-  const bullets = (merged.experience || []).reduce((n,e)=> n + (e.bullets||[]).length, 0);
-  bulkStage('Done — ' + parsed.length + ' resumes merged');
-  setParseStatus(
-    '✓ Merged ' + parsed.length + ' resumes into ' + roles + ' roles and ' + bullets +
-    ' bullets. Review, then Save Profile.','success');
-
-  showTidyButton(bullets);
-}
-
-// Optional extra pass. The local merge only removes bullets that are textually
-// near-identical; this asks the model to catch paraphrases and to reconcile
-// job titles that disagree between versions. Offered rather than automatic,
-// because it costs a call and the profile is already usable without it.
-function showTidyButton(bullets){
-  document.getElementById('tidyBtn')?.remove();
-  if(bullets < 12) return;
-  const btn = document.createElement('button');
-  btn.id = 'tidyBtn';
-  btn.className = 'btn-add';
-  btn.style.cssText = 'width:100%;margin-top:10px;padding:8px';
-  btn.textContent = '✨ Optional: let AI remove duplicate wording (1 extra call)';
-  btn.onclick = tidyMergedProfile;
-  document.getElementById('bulkProgress').appendChild(btn);
-}
-
-async function tidyMergedProfile(){
-  const btn = document.getElementById('tidyBtn');
-  if(btn){ btn.disabled = true; btn.textContent = 'Tidying…'; }
-  try{
-    syncFormToData();
-    const res = await fetch('/api/parse-bundle',{
-      method:'POST', headers:{'Content-Type':'application/json'},
-      body: JSON.stringify({profile: stripIds(profileData)})
-    });
-    const data = await res.json();
-    if(!res.ok) throw new Error(data.error || 'Tidy failed');
-    applyParsedProfile(data.profile);
-    if(data.usage) recordUsage(data.usage, 'tidy merge');
-    const bullets = (profileData.experience||[]).reduce((n,e)=> n + (e.bullets||[]).length, 0);
-    setParseStatus('✓ Tidied — ' + bullets + ' distinct bullets kept. Review, then Save Profile.','success');
-    btn?.remove();
-  }catch(err){
-    setParseStatus('⚠ ' + err.message,'error');
-    if(btn){ btn.disabled = false; btn.textContent = '✨ Retry tidy'; }
-  }
-}
-
-// Drop the local render ids before sending anything to the API.
-function stripIds(p){
-  return {
-    name:p.name, email:p.email, phone:p.phone, location:p.location,
-    linkedin:p.linkedin, availability:p.availability,
-    skills:p.skills, softSkills:p.softSkills, languages:p.languages,
-    education:   (p.education||[]).map(({degree,institution,dates})=>({degree,institution,dates})),
-    experience:  (p.experience||[]).map(({title,company,location,dates,bullets})=>({title,company,location,dates,bullets})),
-    projects:    (p.projects||[]).map(({name,org,dates,keywords})=>({name,org,dates,keywords})),
-    achievements:(p.achievements||[]).map(a=> typeof a==='string'? a : a.text)
-  };
-}
-
-// ─────────────────────────────────────────────
-// LOCAL MERGE
-// ─────────────────────────────────────────────
-const normKey  = s => (s||'').toLowerCase().replace(/[^a-z0-9]+/g,' ').trim();
-// No separators at all, so "Power BI", "power-bi" and "powerbi" collapse together.
-const tightKey = s => (s||'').toLowerCase().replace(/[^a-z0-9]+/g,'');
-
-// Of two spellings of the same thing, keep the better-presented one:
-// capitals and word spacing beat a run-together lowercase version.
-const betterLabel = (a,b) => {
-  const score = t => (/[A-Z]/.test(t)?2:0) + (/\s/.test(t)?1:0) + t.length/100;
-  return score(b) > score(a) ? b : a;
-};
-
-/**
- * Union a list of items where one entry's text may be a longer form of
- * another's ("Deans List" vs "Dean's List for academic excellence").
- * Keeps the fullest wording of each distinct thing.
- */
-function dedupeByContainment(items, textOf, sameGroup, weightOf){
-  // tightKey, not normKey: punctuation must not block the match, or
-  // "Deans List" fails to line up with "Dean's List for academic excellence".
-  const weigh = weightOf || (x => textOf(x).length);
-  const kept = [];
-  for(const it of items){
-    const k = tightKey(textOf(it));
-    if(!k) continue;
-    const hit = kept.find(x => {
-      if(sameGroup && !sameGroup(x, it)) return false;
-      const xk = tightKey(textOf(x));
-      return xk === k || xk.includes(k) || k.includes(xk);
-    });
-    if(!hit) kept.push(it);
-    else if(weigh(it) > weigh(hit)) kept[kept.indexOf(hit)] = it;
-  }
-  return kept;
-}
-
-/** Same job, described by two different CVs? */
-function sameRole(a, b){
-  if(normKey(a.company) !== normKey(b.company)) return false;
-  const ka = normKey(a.title), kb = normKey(b.title);
-  if(ka && ka === kb) return true;
-  if(normKey(a.dates) && normKey(a.dates) === normKey(b.dates)) return true;
-  // Fall back to title word overlap, so "Intern" and "Summer Intern" join but
-  // "Intern" and "Senior Engineer" at the same company stay apart.
-  const A = new Set(ka.split(' ').filter(Boolean));
-  const B = new Set(kb.split(' ').filter(Boolean));
-  if(!A.size || !B.size) return false;
-  let hit = 0; A.forEach(w => { if(B.has(w)) hit++; });
-  return hit / Math.min(A.size, B.size) >= 0.5;
-}
-
-/** Union a list of bullets, dropping textual near-duplicates. */
-function mergeBullets(existing, incoming){
-  const out = existing.slice();
-  const keys = out.map(normKey);
-  for(const raw of incoming){
-    const b = (raw||'').trim();
-    if(b.length < 4) continue;
-    const k = normKey(b);
-    if(!k) continue;
-    let dup = -1;
-    for(let i = 0; i < keys.length; i++){
-      // One containing the other means the same claim at different lengths.
-      if(keys[i] === k || keys[i].includes(k) || k.includes(keys[i])){ dup = i; break; }
-    }
-    if(dup === -1){ out.push(b); keys.push(k); }
-    else if(b.length > out[dup].length){ out[dup] = b; keys[dup] = k; }  // keep the fuller wording
-  }
-  return out;
-}
-
-function mergeProfiles(list){
-  const out = {
-    name:'', email:'', phone:'', location:'', linkedin:'', availability:'',
-    education:[], experience:[], projects:[], achievements:[],
-    skills:'', softSkills:'', languages:''
-  };
-
-  // Single-value fields: keep the most complete answer anyone gave.
-  for(const k of ['name','email','phone','location','linkedin','availability']){
-    for(const p of list){
-      const v = (p && typeof p[k] === 'string' ? p[k] : '').trim();
-      if(v && v.length > out[k].length) out[k] = v;
-    }
-  }
-
-  // Comma-separated fields: union, ignoring spacing and capitalisation so
-  // "Power BI" and "powerbi" collapse to one entry with the tidier spelling.
-  for(const k of ['skills','softSkills','languages']){
-    const seen = new Map();
-    for(const p of list){
-      String((p && p[k]) || '').split(/[,;|\n]/).forEach(tok => {
-        const t = tok.trim(); const key = tightKey(t);
-        if(!t || !key) return;
-        seen.set(key, seen.has(key) ? betterLabel(seen.get(key), t) : t);
-      });
-    }
-    out[k] = [...seen.values()].join(', ');
-  }
-
-  // Education — same institution and one degree title containing the other
-  // means one qualification written two ways; keep the fuller title.
-  // Where two records describe the same thing, keep whichever carries more
-  // detail overall — not merely the longer title.
-  const fullness = o => JSON.stringify(o).length;
-
-  out.education = dedupeByContainment(
-    list.flatMap(p => p?.education || []).filter(e => normKey(e.degree) || normKey(e.institution)),
-    e => e.degree || '',
-    (a,b) => normKey(a.institution) === normKey(b.institution),
-    fullness
-  );
-
-  out.projects = dedupeByContainment(
-    list.flatMap(p => p?.projects || []).filter(x => normKey(x.name)),
-    x => x.name || '',
-    null,
-    fullness
-  );
-
-  // Achievements arrive as plain strings.
-  out.achievements = dedupeByContainment(
-    list.flatMap(p => p?.achievements || [])
-        .map(a => (typeof a === 'string' ? a : a?.text || '').trim())
-        .filter(Boolean),
-    a => a
-  );
-
-  // Experience: group the same job across CVs and pool its bullets.
-  for(const p of list) for(const e of (p?.experience || [])){
-    if(!normKey(e.company) && !normKey(e.title)) continue;
-    const match = out.experience.find(x => sameRole(x, e));
-    if(match){
-      if((e.title||'').length    > (match.title||'').length)    match.title    = e.title;
-      if((e.dates||'').length    > (match.dates||'').length)    match.dates    = e.dates;
-      if((e.location||'').length > (match.location||'').length) match.location = e.location;
-      match.bullets = mergeBullets(match.bullets || [], e.bullets || []);
-    } else {
-      out.experience.push({
-        title: e.title||'', company: e.company||'', location: e.location||'',
-        dates: e.dates||'', bullets: mergeBullets([], e.bullets || [])
-      });
-    }
-  }
-
-  // Keep the pool rich but bounded. Longest bullets first as a rough proxy for
-  // "most specific", then trim to 12 per role.
-  for(const e of out.experience){
-    if(e.bullets.length > 12){
-      e.bullets = e.bullets.slice().sort((a,b)=> b.length - a.length).slice(0,12);
-    }
-  }
-  out.experience = out.experience.slice(0, 10);
-  out.education  = out.education.slice(0, 6);
-  out.projects   = out.projects.slice(0, 8);
-  out.achievements = out.achievements.slice(0, 10);
-
-  return out;
 }
 
 function applyParsedProfile(p){
@@ -1476,10 +865,7 @@ function applyParsedProfile(p){
   if(p.email)    profileData.email=p.email;
   if(p.phone)    profileData.phone=p.phone;
   if(p.location) profileData.location=p.location;
-  if(p.linkedin) profileData.linkedin=p.linkedin;
-  if(p.availability) profileData.availability=p.availability;
   if(p.skills)   profileData.skills=p.skills;
-  if(p.softSkills) profileData.softSkills=p.softSkills;
   if(p.languages)profileData.languages=p.languages;
   if(p.education?.length)
     profileData.education = p.education.map(e=>({id:uid(),degree:e.degree||'',institution:e.institution||'',dates:e.dates||''}));
@@ -1498,84 +884,18 @@ function applyParsedProfile(p){
 // ─────────────────────────────────────────────
 // FORMAT TOGGLE
 // ─────────────────────────────────────────────
-const isLatex = () => currentFormat === 'latex' || currentFormat === 'latex2col';
-const isCover = () => currentFormat === 'coverletter';
-
 function setFormat(fmt){
   currentFormat = fmt;
   document.getElementById('fmtRendered').classList.toggle('active', fmt==='standard');
-  document.getElementById('fmtLatex').classList.toggle('active',    fmt==='latex');
-  document.getElementById('fmtLatex2').classList.toggle('active',   fmt==='latex2col');
-  document.getElementById('fmtCover').classList.toggle('active',    fmt==='coverletter');
-  document.getElementById('coverControls').classList.toggle('show', fmt==='coverletter');
-  document.getElementById('outputLabel').textContent =
-    fmt==='coverletter' ? 'Cover Letter'
-  : fmt==='latex2col'   ? 'LaTeX · Two column — Copy to Overleaf'
-  : fmt==='latex'       ? 'LaTeX · Single column — Copy to Overleaf'
-  :                       'Tailored Resume';
+  document.getElementById('fmtLatex').classList.toggle('active', fmt==='latex');
+  document.getElementById('outputLabel').textContent = fmt==='latex' ? 'LaTeX — Copy to Overleaf' : 'Tailored Resume';
   resetOutput();
-}
-
-// ── COVER LETTER LENGTH ──
-function setCoverWords(n, fromPreset){
-  const v = Math.min(500, Math.max(120, parseInt(n,10) || 250));
-  profileData.prefs.coverWords = v;
-  const input = document.getElementById('coverWords');
-  if(fromPreset) input.value = v;
-  document.getElementById('letterTarget').textContent = v;
-  document.querySelectorAll('.cw-preset').forEach(b =>
-    b.classList.toggle('on', parseInt(b.textContent==='Short'?180:b.textContent==='Standard'?250:350,10) === v));
-  try{ localStorage.setItem('tailorit_profile', JSON.stringify(profileData)); }catch(e){}
-}
-
-// Turn the model's letter into the paper view, and return the plain text so
-// Copy hands over the letter alone — not the score line above it.
-function renderCoverLetter(raw){
-  const marker = raw.search(/###\s*COVER LETTER/i);
-  let head = '', body = raw;
-  if(marker !== -1){
-    head = raw.slice(0, marker).trim();
-    body = raw.replace(/^[\s\S]*?###\s*COVER LETTER\s*/i, '').trim();
-  }
-  body = body.replace(/^---+\s*$/gm, '').trim();
-
-  document.getElementById('coverScore').innerHTML = head ? parseMarkdown(head) : '';
-
-  const blocks = body.split(/\n\s*\n/).map(b => b.trim()).filter(Boolean);
-  const paper = document.getElementById('letterPaper');
-  paper.innerHTML = '';
-
-  blocks.forEach((b, i) => {
-    const el = document.createElement(i === 0 ? 'div' : 'p');
-    // First block is the subject line; the sign-off gets a rule above it.
-    if(i === 0) el.className = 'letter-subject';
-    else if(/^(yours\s+(sincerely|faithfully)|kind\s+regards|best\s+regards|sincerely)/i.test(b))
-      el.className = 'letter-sign';
-    el.textContent = b.replace(/\*\*/g,'');
-    // A sign-off block carries the name on its own line.
-    if(el.className === 'letter-sign') el.innerHTML = esc(el.textContent).replace(/\n/g,'<br>');
-    paper.appendChild(el);
-  });
-
-  // Count the body only, matching what the prompt was told to hit.
-  const counted = blocks.slice(1).filter(b =>
-    !/^(dear\b|yours\s|kind regards|best regards|sincerely)/i.test(b)).join(' ');
-  const wc = counted.trim().split(/\s+/).filter(Boolean).length;
-  const target = profileData.prefs.coverWords || 250;
-  const wcEl = document.getElementById('letterWc');
-  wcEl.textContent = wc;
-  wcEl.className = Math.abs(wc - target) <= Math.max(12, target*0.10) ? 'wc-ok' : 'wc-off';
-  document.getElementById('letterTarget').textContent = target;
-
-  return body;
 }
 
 function resetOutput(){
   document.getElementById('emptyState').style.display='flex';
   document.getElementById('standardOutput').style.display='none';
   document.getElementById('latexOutput').style.display='none';
-  document.getElementById('coverOutput').style.display='none';
-  document.getElementById('latexScore')?.remove();
   document.getElementById('copyBtn').style.display='none';
 }
 
@@ -1598,9 +918,7 @@ function parseMarkdown(md){
   return html;
 }
 function inl(t){
-  // \d{1,3}, not \d{2}: a 100% score never matched, so it silently rendered as
-  // a plain paragraph instead of the score badge.
-  const m=t.match(/^\[?(\d{1,3})%\]?\s*[—–-]\s*(.+)/);
+  const m=t.match(/^\[?(\d{2})%\]?\s*[—–-]\s*(.+)/);
   if(m)return `<div class="score-badge"><span class="score-pct">${m[1]}%</span><span class="score-label">Interview Likelihood</span></div><p style="font-size:12.5px;margin-top:6px">${m[2]}</p>`;
   t=t.replace(/\*\*\*(.+?)\*\*\*/g,'<strong><em>$1</em></strong>');
   t=t.replace(/\*\*(.+?)\*\*/g,'<strong>$1</strong>');
@@ -1610,253 +928,50 @@ function inl(t){
 }
 
 // ─────────────────────────────────────────────
-// TOKEN + COST METER
-// ─────────────────────────────────────────────
-let sessionUsd = 0, sessionRuns = 0;
-
-const fmtTok = n => n >= 1000 ? (n/1000).toFixed(1).replace(/\.0$/,'') + 'k' : String(n);
-const USAGE_KEY = 'tailorit_usage';
-const USAGE_CAP = 500;   // keep the log small enough to never threaten the quota
-
-function loadUsageLog(){
-  try{ const r = localStorage.getItem(USAGE_KEY); return r ? JSON.parse(r) : []; }
-  catch(e){ return []; }
-}
-function saveUsageLog(log){
-  try{ localStorage.setItem(USAGE_KEY, JSON.stringify(log.slice(-USAGE_CAP))); }catch(e){}
-}
-
-/**
- * Called after every API response. Updates the live meter and appends to a
- * log that survives reloads, so "what have I spent this week" has an answer.
- */
-function recordUsage(u, route){
-  if(!u) return;
-  sessionRuns++;
-  if(typeof u.usd === 'number') sessionUsd += u.usd;
-
-  document.getElementById('uModel').textContent = (u.model || '').replace('claude-','');
-  document.getElementById('uIn').textContent    = fmtTok(u.inputTokens || 0);
-  document.getElementById('uOut').textContent   = fmtTok(u.outputTokens || 0);
-  document.getElementById('uCache').textContent = fmtTok(u.cacheReadTokens || 0);
-  document.getElementById('uCost').textContent  =
-    typeof u.usd === 'number' ? '$' + u.usd.toFixed(4) : 'n/a';
-  document.getElementById('uTotal').textContent = '$' + sessionUsd.toFixed(4);
-  document.getElementById('uRuns').textContent  = sessionRuns;
-  document.getElementById('usageBar').classList.add('show');
-
-  const log = loadUsageLog();
-  log.push({
-    ts: Date.now(),
-    route: route || 'generate',
-    model: u.model || '',
-    in: u.inputTokens || 0,
-    cr: u.cacheReadTokens || 0,
-    cw: u.cacheWriteTokens || 0,
-    out: u.outputTokens || 0,
-    usd: typeof u.usd === 'number' ? u.usd : 0,
-  });
-  saveUsageLog(log);
-}
-
-// ── HISTORY VIEW ──
-function openUsage(){
-  renderUsage();
-  document.getElementById('usageBackdrop').classList.add('open');
-  document.body.style.overflow='hidden';
-}
-function closeUsage(){
-  document.getElementById('usageBackdrop').classList.remove('open');
-  document.body.style.overflow='';
-}
-
-function renderUsage(){
-  const log = loadUsageLog();
-  const usd = n => '$' + n.toFixed(n < 1 ? 4 : 2);
-  const sum = (a, k) => a.reduce((n, r) => n + (r[k] || 0), 0);
-  const dayKey = ts => new Date(ts).toISOString().slice(0,10);
-  const today = dayKey(Date.now());
-  const since = d => Date.now() - d*86400000;
-
-  const todays = log.filter(r => dayKey(r.ts) === today);
-  const week   = log.filter(r => r.ts >= since(7));
-
-  document.getElementById('uhCards').innerHTML = [
-    ['Today',       usd(sum(todays,'usd'))],
-    ['Last 7 days', usd(sum(week,'usd'))],
-    ['All time',    usd(sum(log,'usd'))],
-    ['Calls',       String(log.length)],
-    ['Tokens',      fmtTok(sum(log,'in')+sum(log,'cr')+sum(log,'cw')+sum(log,'out'))],
-    ['Cache hits',  (() => {
-        const inTot = sum(log,'in')+sum(log,'cr')+sum(log,'cw');
-        return inTot ? Math.round(sum(log,'cr')/inTot*100)+'%' : '—';
-      })()],
-  ].map(([k,v]) => `<div class="uh-card"><div class="k">${k}</div><div class="v">${v}</div></div>`).join('');
-
-  if(!log.length){
-    document.getElementById('uhDaily').innerHTML  = '<tr><td class="empty-hint">Nothing recorded yet.</td></tr>';
-    document.getElementById('uhModels').innerHTML = '';
-    document.getElementById('uhRecent').innerHTML = '';
-    return;
-  }
-
-  // Group into buckets, then render each table the same way.
-  const group = (rows, keyFn) => {
-    const m = new Map();
-    for(const r of rows){
-      const k = keyFn(r);
-      if(!m.has(k)) m.set(k, {k, n:0, tok:0, usd:0});
-      const g = m.get(k);
-      g.n++; g.tok += (r.in||0)+(r.cr||0)+(r.cw||0)+(r.out||0); g.usd += r.usd||0;
-    }
-    return [...m.values()];
-  };
-
-  const tbl = (rows, head) =>
-    `<tr><th>${head}</th><th class="num">Calls</th><th class="num">Tokens</th><th class="num">Cost</th></tr>` +
-    rows.map(g => `<tr><td>${esc(String(g.k))}</td><td class="num">${g.n}</td>` +
-                  `<td class="num">${fmtTok(g.tok)}</td><td class="num">${usd(g.usd)}</td></tr>`).join('');
-
-  document.getElementById('uhDaily').innerHTML = tbl(
-    group(log.filter(r => r.ts >= since(14)), r => dayKey(r.ts)).sort((a,b)=> b.k.localeCompare(a.k)),
-    'Day');
-
-  document.getElementById('uhModels').innerHTML = tbl(
-    group(log, r => (r.model||'unknown').replace('claude-','')).sort((a,b)=> b.usd - a.usd),
-    'Model');
-
-  document.getElementById('uhRecent').innerHTML =
-    '<tr><th>When</th><th>What</th><th class="num">In/Out</th><th class="num">Cost</th></tr>' +
-    log.slice(-15).reverse().map(r => {
-      const d = new Date(r.ts);
-      const when = d.toLocaleDateString(undefined,{month:'short',day:'numeric'}) + ' ' +
-                   d.toLocaleTimeString(undefined,{hour:'2-digit',minute:'2-digit'});
-      return `<tr><td>${when}</td><td>${esc(r.route||'')}</td>` +
-             `<td class="num">${fmtTok(r.in+r.cr+r.cw)}/${fmtTok(r.out)}</td>` +
-             `<td class="num">${usd(r.usd)}</td></tr>`;
-    }).join('');
-}
-
-function exportUsage(){
-  const log = loadUsageLog();
-  if(!log.length){ alert('Nothing to export yet.'); return; }
-  const rows = [['timestamp','route','model','input_tokens','cache_read','cache_write','output_tokens','usd']];
-  for(const r of log)
-    rows.push([new Date(r.ts).toISOString(), r.route, r.model, r.in, r.cr, r.cw, r.out, r.usd.toFixed(6)]);
-  const csv = rows.map(r => r.join(',')).join('\n');
-  const a = document.createElement('a');
-  a.href = URL.createObjectURL(new Blob([csv], {type:'text/csv'}));
-  a.download = 'tailorit-usage-' + new Date().toISOString().slice(0,10) + '.csv';
-  a.click();
-  setTimeout(()=> URL.revokeObjectURL(a.href), 1000);
-}
-
-function clearUsage(){
-  if(!confirm('Clear the usage history stored in this browser? This cannot be undone.')) return;
-  try{ localStorage.removeItem(USAGE_KEY); }catch(e){}
-  sessionUsd = 0; sessionRuns = 0;
-  renderUsage();
-}
-
-// ── WHICH MODEL IS RUNNING ──
-// Asks the deployment rather than guessing, so the header always shows the
-// truth even after the env var is changed in Vercel.
-async function loadConfig(){
-  const dot = document.getElementById('modelDot');
-  const name = document.getElementById('modelName');
-  try{
-    const res = await fetch('/api/config');
-    if(!res.ok) throw new Error('no config');
-    const c = await res.json();
-    const gen = (c.models?.generate || '?').replace('claude-','');
-    const parse = (c.models?.parse || '?').replace('claude-','');
-    name.textContent = gen;
-    dot.className = 'model-dot' + (c.apiKeyConfigured ? '' : ' off');
-    document.getElementById('modelBadge').title =
-      `Writing: ${c.models?.generate} (effort ${c.effort?.generate})\n` +
-      `Parsing: ${c.models?.parse} (effort ${c.effort?.parse})\n` +
-      (c.apiKeyConfigured ? 'API key configured.' : 'NO API KEY SET — generation will fail.') +
-      '\n\nChange with the GENERATE_MODEL / PARSE_MODEL environment variables.';
-  }catch(e){
-    name.textContent = 'offline';
-    dot.className = 'model-dot off';
-    document.getElementById('modelBadge').title =
-      'Could not reach /api/config. Normal when opening index.html as a local file.';
-  }
-}
-
-// ─────────────────────────────────────────────
 // GENERATE
 // ─────────────────────────────────────────────
-
-// The score is locked so all three formats report the same number for one job.
-// It must NOT survive a change of job description, or a new role silently
-// inherits the previous role's score.
-function syncCachedScore(jd){
-  if(jd !== scoredJd){ cachedScore = null; scoredJd = jd; }
-}
-
 async function generateResume(){
   const jd = document.getElementById('jdInput').value.trim();
   if(!jd){alert('Please paste a job description first.');return;}
-
-  // Pick up any profile edits the user made without pressing Save.
-  syncFormToData();
-  syncCachedScore(jd);
 
   const btn=document.getElementById('generateBtn');
   const copyBtn=document.getElementById('copyBtn');
   btn.disabled=true; btn.classList.add('spinning');
   copyBtn.style.display='none';
+  // Reset cached score at start of each new generation so it gets re-established
+  if(currentFormat==='standard') cachedScore=null;
 
   // Show loading
   document.getElementById('emptyState').style.display='none';
   document.getElementById('standardOutput').style.display='none';
   document.getElementById('latexOutput').style.display='none';
-  document.getElementById('coverOutput').style.display='none';
-  document.getElementById('latexScore')?.remove();
   const loadEl=document.createElement('div');
   loadEl.className='empty-state'; loadEl.id='loadingState';
-  loadEl.innerHTML='<div style="width:20px;height:20px;border:2px solid var(--border);border-top-color:var(--orange);border-radius:50%;animation:spin 0.8s linear infinite"></div><div style="margin-top:10px;font-size:13px">'
-    + (isCover() ? 'Writing your cover letter…' : 'Tailoring your resume…') + '</div>';
+  loadEl.innerHTML='<div style="width:20px;height:20px;border:2px solid var(--border);border-top-color:var(--orange);border-radius:50%;animation:spin 0.8s linear infinite"></div><div style="margin-top:10px;font-size:13px">Tailoring your resume…</div>';
   document.getElementById('outputScroll').appendChild(loadEl);
 
   try{
     const res = await fetch('/api/generate',{
       method:'POST',
       headers:{'Content-Type':'application/json'},
-      body: JSON.stringify({
-        jd,
-        format: currentFormat,
-        profile: stripIds(profileData),
-        lockedScore: cachedScore,
-        prefs: profileData.prefs
-      })
+      body: JSON.stringify({jd, format:currentFormat, profile:profileData, lockedScore:cachedScore, prefs:profileData.prefs})
     });
     const data = await res.json();
     if(!res.ok) throw new Error(data.error||`Server error ${res.status}`);
     const raw = data.content||'';
     document.getElementById('loadingState')?.remove();
 
-    if(isCover()){
-      copyBtn._raw = renderCoverLetter(raw);
-      document.getElementById('coverOutput').style.display='block';
-      const _cm=raw.match(/(\d{1,3})%/);
-      if(_cm) cachedScore=_cm[1]+'%';
-    } else if(isLatex()){
+    if(currentFormat==='latex'){
       const latexStart = raw.indexOf('\\documentclass');
       let likelihood='', latexCode=raw;
       if(latexStart>0){ likelihood=raw.slice(0,latexStart).trim(); latexCode=raw.slice(latexStart).trim(); }
       document.getElementById('latexCode').textContent=latexCode;
       const lo=document.getElementById('latexOutput'); lo.style.display='flex'; lo.style.flexDirection='column';
       if(likelihood){
-        // Tagged with an id and removed above, so repeat runs replace the score
-        // banner instead of stacking a new one on top of the old ones.
-        const lEl=document.createElement('div');
-        lEl.id='latexScore';
-        lEl.innerHTML=parseMarkdown(likelihood); lEl.style.marginBottom='12px';
+        const lEl=document.createElement('div'); lEl.innerHTML=parseMarkdown(likelihood); lEl.style.marginBottom='12px';
         lo.prepend(lEl);
-        const _lm=likelihood.match(/(\d{1,3})%/);
+        // Cache score from LaTeX run too
+        const _lm=likelihood.match(/(\d{2,3})%/);
         if(_lm) cachedScore=_lm[1]+'%';
       }
       copyBtn._raw=latexCode;
@@ -1864,10 +979,10 @@ async function generateResume(){
       document.getElementById('outputContent').innerHTML=parseMarkdown(raw);
       document.getElementById('standardOutput').style.display='block';
       copyBtn._raw=raw;
-      const _sm=raw.match(/(\d{1,3})%/);
+      // Cache score so LaTeX run uses the same value
+      const _sm=raw.match(/(\d{2,3})%/);
       if(_sm) cachedScore=_sm[1]+'%';
     }
-    if(data.usage) recordUsage(data.usage, currentFormat==='coverletter' ? 'cover letter' : 'resume ' + currentFormat);
     copyBtn.style.display='inline-flex'; copyBtn.classList.remove('copied'); copyBtn.textContent='Copy';
   }catch(err){
     document.getElementById('loadingState')?.remove();
@@ -1911,13 +1026,9 @@ function dismissOnboard(){
   setTimeout(()=>{ el.style.display='none'; }, 360);
   try{ localStorage.setItem('tailorit_onboard','1'); }catch(e){}
 }
-// The overlay starts hidden in the markup and is shown here only when it has
-// not been dismissed before. Doing it the other way round made it flash on
-// every repeat visit before the script got a chance to hide it.
 function initOnboard(){
-  let seen = false;
-  try{ seen = !!localStorage.getItem('tailorit_onboard'); }catch(e){}
-  if(!seen) document.getElementById('onboardOverlay').style.display='flex';
+  try{ if(localStorage.getItem('tailorit_onboard')) { document.getElementById('onboardOverlay').style.display='none'; return; } }catch(e){}
+  // Already visible by default
 }
 
 // ─────────────────────────────────────────────
@@ -1977,40 +1088,7 @@ async function submitFeedback(){
 // ─────────────────────────────────────────────
 loadProfile();
 initOnboard();
-setUploadMode('single');
-setCoverWords(profileData.prefs.coverWords || 250, true);
-loadConfig();
 </script>
-<!-- ══ USAGE HISTORY ══ -->
-<div id="usageBackdrop" onclick="if(event.target===this)closeUsage()">
-  <div id="usageModal">
-    <div class="uh-head">
-      <div>
-        <div class="uh-title">Token usage</div>
-        <div class="fb-sub">Recorded in this browser. Anthropic's console is the billing source of truth.</div>
-      </div>
-      <button class="btn-close-drawer" onclick="closeUsage()">×</button>
-    </div>
-    <div class="uh-cards" id="uhCards"></div>
-    <div class="uh-sec">Last 14 days</div>
-    <table class="uh-tbl" id="uhDaily"></table>
-    <div class="uh-sec">By model</div>
-    <table class="uh-tbl" id="uhModels"></table>
-    <div class="uh-sec">Recent calls</div>
-    <table class="uh-tbl" id="uhRecent"></table>
-    <div class="uh-actions">
-      <button class="uh-btn" onclick="exportUsage()">Download CSV</button>
-      <button class="uh-btn" onclick="clearUsage()">Clear history</button>
-    </div>
-    <div class="uh-note">
-      These figures are calculated from the <code>usage</code> the API returns on every
-      call, and are stored only in this browser — clearing site data erases them, and
-      another device keeps its own count. For authoritative, account-wide billing open
-      <a href="https://console.anthropic.com/settings/usage" target="_blank" rel="noopener">console.anthropic.com → Usage</a>.
-    </div>
-  </div>
-</div>
-
 <!-- ══ FEEDBACK MODAL ══ -->
 <div id="feedbackBackdrop" onclick="handleFeedbackBackdrop(event)">
   <div id="feedbackModal">
